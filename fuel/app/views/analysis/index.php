@@ -7,6 +7,9 @@
 <body>
 <p>analysis/index</p>
 
-<?php echo $test ?>
+<a href="user/alluser">ユーザ一覧</a>
+
+<a href="readFile">csv読み込み</a>
+
 </body>
 </html>
