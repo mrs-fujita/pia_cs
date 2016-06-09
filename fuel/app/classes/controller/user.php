@@ -86,8 +86,11 @@ class Controller_User extends Controller
 	 */
 	public function action_alluser()
 	{
-		$data[] = Model_User::find('all');
-		return Response::forge(View::forge('auth/regist',$data));
+		// 全てのユーザを取得
+		//$data[] = Model_User::find('all');
+		//return Response::forge(View::forge('user/index',$data));
+
+		return Response::forge(View::forge('user/index'));
 	}
 
 	/**
