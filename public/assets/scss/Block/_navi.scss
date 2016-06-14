@@ -1,0 +1,19 @@
+/*
+# headerのナビ
+*/
+
+.navi {
+  ul { list-style: none; }
+  ul, li { margin: 0; padding: 0; }
+}
+
+.navi {
+
+  .navi_logo {
+  }
+  .navi_list {
+    display: flex;
+    align-items: center;
+  }
+  .navi_item { padding: 0 24px; }
+}

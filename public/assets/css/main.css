@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .readCsv .readCsv_dropFile {
   background: #FFC;
   border: 2px dashed #CCC;
@@ -29,5 +30,19 @@
 
 #percent { background: #55d49b; margin: 20px 0; width: 0; height: 10px; }
 */
+/*
+# headerのナビ
+*/
+.navi ul {
+  list-style: none; }
+.navi ul, .navi li {
+  margin: 0;
+  padding: 0; }
+
+.navi .navi_list {
+  display: flex;
+  align-items: center; }
+.navi .navi_item {
+  padding: 0 24px; }
 
 /*# sourceMappingURL=main.css.map */
