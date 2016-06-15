@@ -50,13 +50,16 @@ class Controller_User extends Controller
 		//=>で書くんやで
 		$auth = Model_Auth::get_auth($name,$pass);
 		$data["msg"] = "ログインに失敗しました";
+
+
 		if($auth){
-			return Response::forge(View::forge('team/teamselect'));
+			Response::redirect('team/select');
 		}
 		// $data["id"] = $id;
     // $data["pass"] = $pass;
 		// 返した配列は連想名で呼び出される
 		return Response::forge(View::forge('auth/login',$data));
+
 	}
 
 	/**

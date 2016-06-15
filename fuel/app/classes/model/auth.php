@@ -7,7 +7,7 @@ class Model_Auth extends Model_Crud {
     {
       $accept = false;
         $ret = DB::select()->
-                from('user')->
+                from('Admin_Table')->
                 //引数$date, $limit=5, $offset=0
                 //query(ゼンブカキー)->excute();でもいけるンゴ
                 // where('published', '>=', $date->format('Y-m-d H:i:s'))->

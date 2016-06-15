@@ -50,11 +50,18 @@ class Controller_Team extends Controller
 		//--$"columnsname" = $post["columnsname"];
 		//and into $data_u[];
 		//$data_u = "data"
+		/*
 		$update = Model_Team::post_team($post["id"],$data_u);
 		$data["msg"] = "更新に失敗しました。";
 		if($update){
 			$data["msg"] = "更新に成功しました。";
 		}
 		return Response::forge(View::forge('auth/regist',$data));
+		*/
+	}
+
+	public function action_select()
+	{
+		return Response::forge(View::forge('team/select'));
 	}
 }
