@@ -1,0 +1,43 @@
+/*
+# teamInfo
+teamSelect画面でチームの詳細を表示する
+*/
+
+.teamInfo {
+  width: 248px;
+  height: 400px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+
+  .teamInfo_header {
+    display: flex;
+    align-items: center;
+  }
+
+  .teamInfo_icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .teamInfo_mainImgWrap {
+    width: 100%;
+    text-align: center;
+  }
+  .teamInfo_mainImg {
+
+  }
+
+  .teamInfo_form {
+    text-align: center;
+  }
+  .teamInfo_button {
+    margin-bottom: 12px;
+  }
+  .teamInfo_submitButton {
+    padding: 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}

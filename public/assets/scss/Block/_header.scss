@@ -1,0 +1,51 @@
+/*
+# header
+*/
+.header {
+
+}
+
+.header {
+  &.header-teamSelect {
+    background-color: #000;
+    position: relative;
+    text-align: center;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 6px;
+      margin: -6px 0 0;
+      background: #118ce2;
+      background: -moz-linear-gradient(left, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+      background: -webkit-linear-gradient(left, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+      background: linear-gradient(to right, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#118ce2', endColorstr='#512af9', GradientType=1);
+    }
+    *:before, *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .header-teamSelect_title {
+      margin: 0; padding: 0;
+      color: #fff;
+      padding: 16px 0;
+      font-family: $font-jp;
+      font-weight: 100;
+      font-size: 20px;
+    }
+
+    .header-teamSelect_selectBoxWrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .header-teamSelect_selectBox {
+
+    }
+  }
+}

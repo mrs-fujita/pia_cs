@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<title></title>
 	<?php echo Asset::css('normalize.css'); ?>
 	<?php echo Asset::css('main.css'); ?>
 </head>
+
 <body>
 <header class="header">
 	<?php echo View::forge('views/header') //headerの読み込み ?>

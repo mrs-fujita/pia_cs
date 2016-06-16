@@ -1,4 +1,41 @@
 @charset "UTF-8";
+/* setting */
+/*
+#font
+サイト全体で使うフォント
+*/
+/* tool */
+/* bg shortcodes */
+.bg-gradient1 span,
+.bg-gradient1:before {
+  background: #52A0FD;
+  background: -moz-linear-gradient(left, #52A0FD 0%, #00e2fa 80%, #00e2fa 100%);
+  background: -webkit-linear-gradient(left, #52A0FD 0%, #00e2fa 80%, #00e2fa 100%);
+  background: linear-gradient(to right, #52A0FD 0%, #00e2fa 80%, #00e2fa 100%); }
+
+.bg-gradient2 span,
+.bg-gradient2:before {
+  background: #44ea76;
+  background: -moz-linear-gradient(left, #44ea76 0%, #39fad7 80%, #39fad7 100%);
+  background: -webkit-linear-gradient(left, #44ea76 0%, #39fad7 80%, #39fad7 100%);
+  background: linear-gradient(to right, #44ea76 0%, #39fad7 80%, #39fad7 100%); }
+
+.bg-gradient3 span,
+.bg-gradient3:before {
+  background: #FFE1E1;
+  background: -moz-linear-gradient(left, #FFE1E1 0%, #FFFFFF 80%, #FFFFFF 100%);
+  background: -webkit-linear-gradient(left, #FFE1E1 0%, #FFFFFF 80%, #FFFFFF 100%);
+  background: linear-gradient(to right, #FFE1E1 0%, #FFFFFF 80%, #FFFFFF 100%); }
+
+/* base */
+/*
+# base
+全体に効かせるCSS
+*/
+body {
+  margin: 0; }
+
+/* block */
 .readCsv .readCsv_dropFile {
   background: #FFC;
   border: 2px dashed #CCC;
@@ -44,5 +81,213 @@
   align-items: center; }
 .navi .navi_item {
   padding: 0 24px; }
+
+/*
+# header
+*/
+.header.header-teamSelect {
+  background-color: #000;
+  position: relative;
+  text-align: center; }
+  .header.header-teamSelect::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 6px;
+    margin: -6px 0 0;
+    background: #118ce2;
+    background: -moz-linear-gradient(left, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+    background: -webkit-linear-gradient(left, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+    background: linear-gradient(to right, #118ce2 0%, #8ecbff 56%, #512af9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#118ce2', endColorstr='#512af9', GradientType=1); }
+  .header.header-teamSelect *:before, .header.header-teamSelect *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .header.header-teamSelect .header-teamSelect_title {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    padding: 16px 0;
+    font-family: YuGothic, "游ゴシック", Meiryo, sans-serif;
+    font-weight: 100;
+    font-size: 20px; }
+  .header.header-teamSelect .header-teamSelect_selectBoxWrap {
+    position: absolute;
+    right: 0;
+    top: 0; }
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 150px;
+  background: #f2f2f2;
+  border: 1px solid;
+  border-color: white #f7f7f7 #f5f5f5;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08); }
+  .dropdown:before, .dropdown:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 4px dashed;
+    border-color: #888 transparent;
+    pointer-events: none; }
+  .dropdown:before {
+    border-bottom-style: solid;
+    border-top: none; }
+  .dropdown:after {
+    margin-top: 7px;
+    border-top-style: solid;
+    border-bottom: none; }
+
+.dropdown-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  /* Fallback for IE 8 */
+  background: #f2f2f2;
+  /* "transparent" doesn't work with Opera */
+  background: transparent !important;
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none; }
+  .dropdown-select:focus {
+    z-index: 3;
+    width: 100%;
+    color: #394349;
+    outline: 2px solid #49aff2;
+    outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: -2px; }
+  .dropdown-select > option {
+    margin: 3px;
+    padding: 6px 8px;
+    text-shadow: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer; }
+
+/*
+# teamInfo
+teamSelect画面でチームの詳細を表示する
+*/
+.teamInfo {
+  width: 248px;
+  height: 400px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75); }
+  .teamInfo .teamInfo_header {
+    display: flex;
+    align-items: center; }
+  .teamInfo .teamInfo_icon {
+    width: 48px;
+    height: 48px; }
+  .teamInfo .teamInfo_mainImgWrap {
+    width: 100%;
+    text-align: center; }
+  .teamInfo .teamInfo_form {
+    text-align: center; }
+  .teamInfo .teamInfo_button {
+    margin-bottom: 12px; }
+  .teamInfo .teamInfo_submitButton {
+    padding: 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0); }
+
+.fancyButton {
+  display: inline-block;
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  position: relative; }
+  .fancyButton:before {
+    content: '';
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    bottom: -5px;
+    left: 30px;
+    right: 30px;
+    z-index: -1;
+    border-radius: 30em;
+    filter: blur(20px) brightness(0.95);
+    -webkit-filter: blur(20px) brightness(0.95);
+    -moz-filter: blur(20px) brightness(0.95);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out; }
+  .fancyButton i {
+    margin-top: -1px;
+    margin-right: 20px;
+    font-size: 1.265em;
+    vertical-align: middle; }
+  .fancyButton span {
+    text-align: center;
+    width: 200px;
+    display: inline-block;
+    padding: 10px 0;
+    border-radius: 50em;
+    position: relative;
+    z-index: 2;
+    will-change: transform, filter;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out; }
+  .fancyButton:focus, .fancyButton:active {
+    color: #cfcfcf; }
+  .fancyButton:hover {
+    color: #cfcfcf; }
+    .fancyButton:hover span {
+      filter: brightness(1.05) contrast(1.05);
+      -webkit-filter: brightness(1.05) contrast(1.05);
+      -moz-filter: brightness(1.05) contrast(1.05);
+      transform: scale(0.95); }
+    .fancyButton:hover:before {
+      bottom: 0;
+      filter: blur(10px) brightness(0.95);
+      -webkit-filter: blur(10px) brightness(0.95);
+      -moz-filter: blur(10px) brightness(0.95); }
+  .fancyButton.pop-onhover:before {
+    opacity: 0;
+    bottom: 10px; }
+  .fancyButton.pop-onhover:hover:before {
+    bottom: -7px;
+    opacity: 1;
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px); }
+  .fancyButton.pop-onhover:hover span {
+    transform: scale(1.04); }
+  .fancyButton.pop-onhover:hover:active span {
+    filter: brightness(1) contrast(1);
+    -webkit-filter: brightness(1) contrast(1);
+    -moz-filter: brightness(1) contrast(1);
+    transform: scale(1);
+    transition: all 0.15s ease-out; }
+  .fancyButton.pop-onhover:hover:active:before {
+    bottom: 0;
+    filter: blur(10px) brightness(0.95);
+    -webkit-filter: blur(10px) brightness(0.95);
+    -moz-filter: blur(10px) brightness(0.95);
+    transition: all 0.2s ease-out; }
 
 /*# sourceMappingURL=main.css.map */
