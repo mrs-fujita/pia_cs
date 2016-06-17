@@ -1,18 +1,18 @@
-<div class="teamInfo">
+<div class="teamInfo js-teamInfo">
 	<div class="teamInfo_header">
 
-		<img src="http://localhost/pia_cs/public/assets/img/club/1/emblem.png" alt="" class="teamInfo_icon js-teamIcon">
+		<img src="http://localhost/pia_cs/public/assets/img/club/1/icon.png" alt="" class="teamInfo_icon js-teamIcon">
 		<div class="teamInfo_teamName js-teamName"></div>
 	</div>
 
 	<div class="teamInfo_mainImgWrap">
-		<img src="http://localhost/pia_cs/public/assets/img/club/1/1-1.png" alt="" class="teamInfo_mainImg">
+		<img src="http://localhost/pia_cs/public/assets/img/club/1/1.png" alt="" class="teamInfo_mainImg">
 	</div>
 
 	<div class="teamInfo_form">
 		<?php echo Form::open('analysis'); ?>
 
-		<a href='#' class='teamInfo_button teamInfo_cancelButton fancyButton pop-onhover bg-gradient3'>
+		<a href='#' class='teamInfo_button teamInfo_cancelButton fancyButton pop-onhover bg-gradient3 js-teamInfoCancelButton'>
 			<span>キャンセル</span>
 		</a>
 
