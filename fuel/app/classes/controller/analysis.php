@@ -1,15 +1,22 @@
 <?php
 
-class Controller_Analysis extends Controller_Template
+class Controller_Analysis extends Controller_App
 {
 	public function action_index()
 	{
+
+		// 選択されたチームを判定する処理
+		$team_id = -1;
+
+		$post = Input::post();
+		if($post) {
+			$team_id = $post["team_id"];
+		}
+
+
 		$this->template = View::forge('template');
 
 
-		// ログインをしているかなどの処理
-
-		// 選択されたチームを判定する処理
 
 		// 必要なデータを取得
 		$data["test"] = "test";
