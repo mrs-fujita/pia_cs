@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * ユーザ認証が行われているかを確認し、
+ * ユーザ認証が済んでいなかった場合はログイン画面にリダイレクトさせるコントローラー
+ *
+ * Class Controller_App
+ */
 class Controller_App extends Controller_Template {
 	public function before() {
 		parent::before();
@@ -11,5 +16,4 @@ class Controller_App extends Controller_Template {
 		}
 	}
 }
-
 ?>
