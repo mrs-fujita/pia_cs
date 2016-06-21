@@ -19,7 +19,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Team extends Controller
+class Controller_Team extends Controller_App
 {
 
 
