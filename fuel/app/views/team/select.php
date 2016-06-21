@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>teamSelect</title>
-	<?php echo Asset::css('normalize.css'); ?>
 	<?php echo Asset::css('main.css'); ?>
 </head>
 

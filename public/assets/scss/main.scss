@@ -9,6 +9,7 @@
 /* base */
 @import "base/base";
 @import "base/generic";
+@import "base/normalize";
 
 /* block */
 @import "block/readCsv";
@@ -18,3 +19,4 @@
 @import "block/teamInfo";
 @import "block/fancyButton";
 @import "block/selectBox";
+
