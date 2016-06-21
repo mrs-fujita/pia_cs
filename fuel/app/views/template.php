@@ -1,3 +1,4 @@
+<!-- サイドバーのあるテンプレート -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,15 @@
 	<?php echo View::forge('views/header') //headerの読み込み ?>
 </header>
 
-<div id="content">
-	<?php echo $content; //contentsの読み込み ?>
+<div class="main" id="main">
+
+	<div class="sidebar">
+		<?php echo View::forge('views/sidebar') //sidebarの読み込み ?>
+	</div>
+
+	<div class="content content-sidebarOn">
+		<?php echo $content; //contentsの読み込み ?>
+	</div>
 </div>
 
 <footer class="footer">

@@ -27,7 +27,26 @@
   background: -webkit-linear-gradient(left, #FFE1E1 0%, #FFFFFF 80%, #FFFFFF 100%);
   background: linear-gradient(to right, #FFE1E1 0%, #FFFFFF 80%, #FFFFFF 100%); }
 
+/*
+clear
+*/
+.main {
+  overflow: hidden;
+  *zoom: 1; }
+
 /* base */
+.sidebar {
+  width: 300px;
+  background-color: red;
+  display: inline-block;
+  float: left; }
+
+.content.content-sidebarOn {
+  display: inline-block;
+  background-color: blue;
+  width: -webkit-calc(100% - 300px);
+  width: calc(100% - 300px); }
+
 /*
 # base
 全体に効かせるCSS
@@ -289,5 +308,15 @@ teamSelect画面でチームの詳細を表示する
     -webkit-filter: blur(10px) brightness(0.95);
     -moz-filter: blur(10px) brightness(0.95);
     transition: all 0.2s ease-out; }
+
+/*
+# selectBox
+アイテムを選択するための箱
+*/
+.selectBox li {
+  list-style: none; }
+.selectBox ul, .selectBox li {
+  margin: 0;
+  padding: 0; }
 
 /*# sourceMappingURL=main.css.map */

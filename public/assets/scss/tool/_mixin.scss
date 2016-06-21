@@ -20,3 +20,11 @@
 .bg-gradient3:before {
   @include gradientBg(#FFE1E1, #FFFFFF);
 }
+
+/*
+clearfix
+*/
+%clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}

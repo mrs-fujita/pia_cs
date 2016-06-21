@@ -21,9 +21,6 @@
  */
 class Controller_Team extends Controller_App
 {
-
-
-
 	/**
 	 * Serect content "Teams"
 	 *
