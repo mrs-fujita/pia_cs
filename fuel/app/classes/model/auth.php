@@ -5,8 +5,11 @@ class Model_Auth extends Model_Crud {
 
   public static function get_auth($name,$pass)
     {
-      $accept = false;
-        $ret = DB::select()->
+      $ret["accept"] = false;
+      $ret["id"] = null;
+      //$accept = false;
+      //$id = null;
+        $rows = DB::select()->
                 from('Admin_Table')->
                 //引数$date, $limit=5, $offset=0
                 //query(ゼンブカキー)->excute();でもいけるンゴ
@@ -16,13 +19,16 @@ class Model_Auth extends Model_Crud {
                 // offset($offset)->
                 execute();
 
-        foreach($ret as $value){
-          if($value["name"] === $name){
-            if($value["password"] == $pass){
-              $accept = true;
+        foreach($rows as $row){
+          if($row["name"] === $name){
+            if($row["password"] == $pass){
+              $ret["accept"] = true;
+              $ret["id"] = $row["id"];
+              //$accept = true;
+              break;
             }
           }
         }
-        return $accept;
+        return $ret;
     }
 }

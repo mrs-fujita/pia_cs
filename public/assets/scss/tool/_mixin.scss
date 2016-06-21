@@ -1,0 +1,22 @@
+@mixin gradientBg($startColor, $endColor) {
+  background: $startColor;
+  background: -moz-linear-gradient(left, $startColor 0%, $endColor 80%, $endColor 100%);
+  background: -webkit-linear-gradient(left, $startColor 0%, $endColor 80%, $endColor 100%);
+  background: linear-gradient(to right, $startColor 0%, $endColor 80%, $endColor 100%);
+}
+
+/* bg shortcodes */
+.bg-gradient1 span,
+.bg-gradient1:before {
+  @include gradientBg(#52A0FD, #00e2fa);
+}
+
+.bg-gradient2 span,
+.bg-gradient2:before {
+  @include gradientBg(#44ea76, #39fad7);
+}
+
+.bg-gradient3 span,
+.bg-gradient3:before {
+  @include gradientBg(#FFE1E1, #FFFFFF);
+}

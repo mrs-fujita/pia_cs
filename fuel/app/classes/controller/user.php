@@ -48,11 +48,13 @@ class Controller_User extends Controller
 		//指定したテーブルからクエリでパクってくる
 		//arrayだと複数パクれる
 		//=>で書くんやで
-		$auth = Model_Auth::get_auth($name,$pass);
+		$ret = Model_Auth::get_auth($name,$pass);
+		$auth = $ret["accept"];
 		$data["msg"] = "ログインに失敗しました";
 
 
 		if($auth){
+			Session::set('userid', $ret["id"]);
 			Response::redirect('team/select');
 		}
 		// $data["id"] = $id;
