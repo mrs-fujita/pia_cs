@@ -62,8 +62,7 @@
 		echo Form::select('league', 'none', array(
 			'all' => '全リーグ',
 			'j1'  => 'J1',
-			'j2'  => 'J2',
-			'j3'  => 'J3'
+			'j2'  => 'J2'
 		), array( 'class' => 'header-teamSelect_selectBox dropdown-select' ));
 		?>
 	</div>
