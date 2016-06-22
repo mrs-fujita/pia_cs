@@ -35,9 +35,13 @@ class Controller_ReadFile extends Controller
 
 		//参考URL：http://qiita.com/mpyw/items/caa2568284b69d270f8b
 
-		$data["row"] = [];
-		$data["fp"] = [];
+		//$data["row"] = [];
+		//$data["fp"] = [];
 		$data["csv"] = [];
+		$data["team_name"] = [];
+		$data["year"] = [];
+		$data["grade"] = [];
+		//$data["file_name"] = [];
 
 		// パラメータを正しい構造で受け取った時のみ実行
 		if (isset($_FILES['up_file']['error']) && is_int($_FILES['up_file']['error'])) {
@@ -59,6 +63,7 @@ class Controller_ReadFile extends Controller
 						throw new RuntimeException('Unknown error');
 				}
 
+				$file_name = $_FILES['up_file']['name'];
 				$tmp_name = $_FILES['up_file']['tmp_name'];
 				$detect_order = 'ASCII,JIS,UTF-8,CP51932,SJIS-win';
 				setlocale(LC_ALL, 'ja_JP.UTF-8');
@@ -73,16 +78,32 @@ class Controller_ReadFile extends Controller
 				file_put_contents($tmp_name, mb_convert_encoding($buffer, 'UTF-8', $encoding));
 				unset($buffer);
 
-				/*
-				$fp = fopen($tmp_name, 'rb');
-				$row = fgetcsv($fp);
-				$data["row"] = $row;
-				*/
 
 				$csv = new SplFileObject($tmp_name, 'r');
 				$csv->setFlags(SplFileObject::READ_CSV);
 
 				$data["csv"] = $csv;
+
+
+
+				$arr = explode("_", $file_name);
+
+				$team_name = $arr[0]; //TO, NGなどのチーム名を取得
+				$data["team_name"] = $team_name;
+				$data["year"] = $arr[1]; // 年度を取得
+
+				// CLUBの情報を取得
+				$club = Model_Club::find_one_by('pia_clubcode', $team_name);
+				$club_id = $club["id"]; // clubのidを取得
+				$data["club_id"] = $club_id;
+
+				$data["club"] = $club;
+
+
+				$grade = Model_ClubMenberRank::get_club_rank_from_club_id((int)$club_id);
+				$data["grade"] = $grade;
+
+
 
 			}catch (Exception $e) {
 				// エラーメッセージをセット

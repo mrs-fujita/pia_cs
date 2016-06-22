@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="teamInfo_mainImgWrap">
-		<img src="http://localhost/pia_cs/public/assets/img/club/1/1.png" alt="" class="teamInfo_mainImg">
+		<img src="http://localhost/pia_cs/public/assets/img/club/1/1.png" alt="" class="teamInfo_mainImg js-teamMainImg">
 	</div>
 
 	<div class="teamInfo_form">

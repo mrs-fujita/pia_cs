@@ -9,14 +9,30 @@
 
 <p>upload</p>
 
-<?php // echo $flg; ?>
+<?php //echo $file_name; ?>
 
-<?php var_dump($row) ?>
+<?php echo $team_name; ?>
+
+<?php var_dump($club); ?>
+<br>
+<br>
+
+<?php var_dump((int)$club_id); ?>
+<br>
+<br>
+
+<?php var_dump($grade); ?>
+<br>
+<br>
 
 
+<?php // var_dump($row) ?>
+
+<br>
+<br>
 
 
-<?php var_dump($csv) ?>
+<?php // var_dump($csv) ?>
 
 </body>
 </html>

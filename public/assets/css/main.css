@@ -586,6 +586,8 @@ teamSelect画面でチームの詳細を表示する
   .teamInfo .teamInfo_mainImgWrap {
     width: 100%;
     text-align: center; }
+  .teamInfo .teamInfo_mainImg {
+    width: 100%; }
   .teamInfo .teamInfo_form {
     text-align: center; }
   .teamInfo .teamInfo_button {

@@ -125,9 +125,12 @@ var clubImg = {
   basicImgPath: "http://localhost/pia_cs/public/assets/img/club/",
 
   $icon: $(".js-teamIcon"),
+  $mainImg: $(".js-teamMainImg"),
 
   changeLeagueIcon: function(id) {
     var url = this.basicImgPath + id + "/icon.png";
+    var url2 = this.basicImgPath + id + "/1.png";
     this.$icon.attr("src",url);
+    this.$mainImg.attr("src",url2);
   }
 }
