@@ -11,28 +11,34 @@
 
 <?php //echo $file_name; ?>
 
-<?php echo $team_name; ?>
+<?php //echo $team_name; ?>
 
-<?php var_dump($club); ?>
+<?php //var_dump($club); ?>
 <br>
 <br>
 
-<?php var_dump((int)$club_id); ?>
-<br>
-<br>
+<?php
 
-<?php var_dump($grade); ?>
-<br>
-<br>
-
-
-<?php // var_dump($row) ?>
-
+foreach($grades as $grade) {
+	var_dump($grade["grade_name"]);
+	echo "<br><br>";
+}
+?>
 <br>
 <br>
 
 
-<?php // var_dump($csv) ?>
+<?php
+foreach($csv as $key => $row) {
+	if($key != 0) {
+		echo $key;
+		echo "<br>";
+		var_dump($row);
+		echo "<br><br>";
+	}
+
+}
+?>
 
 </body>
 </html>

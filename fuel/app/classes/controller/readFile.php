@@ -27,28 +27,35 @@ class Controller_ReadFile extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_index() {
+	public function action_index()
+	{
 		return Response::forge(View::forge('readFile/index'));
 	}
 
-	public function action_upload() {
+	public function action_upload()
+	{
 
 		//参考URL：http://qiita.com/mpyw/items/caa2568284b69d270f8b
 
 		//$data["row"] = [];
 		//$data["fp"] = [];
-		$data["csv"] = [];
-		$data["team_name"] = [];
-		$data["year"] = [];
-		$data["grade"] = [];
+		//$data["csv"] = [ ];
+		//$data["team_name"] = [ ];
+		//$data["year"] = [ ];
+		//$data["grades"] = [ ];
 		//$data["file_name"] = [];
 
-		// パラメータを正しい構造で受け取った時のみ実行
-		if (isset($_FILES['up_file']['error']) && is_int($_FILES['up_file']['error'])) {
+		$grade_name_col_num = 13;
 
-			try {
+		// パラメータを正しい構造で受け取った時のみ実行
+		if(isset( $_FILES['up_file']['error'] ) && is_int($_FILES['up_file']['error']))
+		{
+
+			try
+			{
 				// ファイルアップロードエラーチェック
-				switch ($_FILES['up_file']['error']) {
+				switch( $_FILES['up_file']['error'] )
+				{
 					case UPLOAD_ERR_OK:
 						// エラー無し
 						break;
@@ -70,13 +77,14 @@ class Controller_ReadFile extends Controller
 
 				// 文字コードを変換してファイルを置換
 				$buffer = file_get_contents($tmp_name);
-				if (!$encoding = mb_detect_encoding($buffer, $detect_order, true)) {
+				if(!$encoding = mb_detect_encoding($buffer, $detect_order, true))
+				{
 					// 文字コードの自動判定に失敗
-					unset($buffer);
+					unset( $buffer );
 					throw new RuntimeException('Character set detection failed');
 				}
 				file_put_contents($tmp_name, mb_convert_encoding($buffer, 'UTF-8', $encoding));
-				unset($buffer);
+				unset( $buffer );
 
 
 				$csv = new SplFileObject($tmp_name, 'r');
@@ -85,36 +93,132 @@ class Controller_ReadFile extends Controller
 				$data["csv"] = $csv;
 
 
-
+				// ファイル名から年度とチーム名を取得
 				$arr = explode("_", $file_name);
+				$team_name = $arr[0]; //チーム名      TO, NG
+				$file_year = $arr[1]; //ファイルの年度 2014, 2015
+				$file_type = $arr[2]; //ファイルの区分 member, kansen
 
-				$team_name = $arr[0]; //TO, NGなどのチーム名を取得
-				$data["team_name"] = $team_name;
-				$data["year"] = $arr[1]; // 年度を取得
 
 				// CLUBの情報を取得
 				$club = Model_Club::find_one_by('pia_clubcode', $team_name);
 				$club_id = $club["id"]; // clubのidを取得
-				$data["club_id"] = $club_id;
 
-				$data["club"] = $club;
+				if($file_type == "member")
+				{
+
+					if($file_year == 2014)
+					{
+						$this->saveMemberFromCsvBefore2014($csv, $club_id, $team_name);
+					}
+					else
+					{
+						echo "2015年以降の処理";
+					}
+				}
+				else
+				{
+					echo "観戦者の処理";
+				}
 
 
-				$grade = Model_ClubMenberRank::get_club_rank_from_club_id((int)$club_id);
-				$data["grade"] = $grade;
-
-
-
-			}catch (Exception $e) {
+			} catch( Exception $e )
+			{
 				// エラーメッセージをセット
-				$msg = array('red', $e->getMessage());
+				$msg = array( 'red', $e->getMessage() );
 			}
 
 
-		}else {
+		}
+		else
+		{
 			// ファイルがなかった場合
 		}
 
-		return Response::forge(View::forge('readFile/upload', $data));
+		//return Response::forge(View::forge('readFile/upload', $data));
+	}
+
+	private function saveMemberFromCsvBefore2014($csv, $club_id, $team_name)
+	{
+		// チームの会員グレードが指定されている列番号
+		$grade_name_col_num = 13;
+
+		// チームの会員のグレードを取得する
+		$grades = Model_ClubMenberRank::get_club_rank_from_club_id((int) $club_id);
+		$data["grades"] = $grades;
+
+
+		$i = 0;
+		foreach($csv as $key => $row)
+		{
+			if($key != 0)
+			{
+				foreach($grades as $grade)
+				{
+					// csvの会員グレード名と同じグレードが見つかった場合
+					if($row[ $grade_name_col_num ] == $grade["grade_name"])
+					{
+						// 主キーとなるidを生成 例：JU000001
+						$member_id = $team_name . sprintf('%06d', $i);
+
+						// 性別 男性：0、女性：1、 null：null
+						$sex_num = null;
+						if(!empty( $row[2] ))
+							$sex_num = $row[2] == "男" ? 0 : 1;
+
+
+						// 郵便番号 "-"を削除しInt型に変換
+						$post_num = null;
+						if(!empty( $row[4] ))
+							$post_num = (int) str_replace("-", "", $row[4]);
+
+
+						// 登録するメンバーを生成
+						$member = Model_Member::forge()->set(array(
+							'id'                => $member_id,
+							'club_id'           => (int) $club_id,
+							'gender'            => $sex_num,
+							'birthday'          => $row[3],
+							'post'              => $post_num,
+							'address1'          => $row[5],
+							'address2'          => $row[6],
+							'address3'          => $row[7],
+							'address4'          => $row[8],
+							'home_tell'         => $row[9],
+							'mobile_tell'       => $row[10],
+							'family_name_kana'  => $row[15],
+							'family_name_kanji' => $row[17],
+							'first_name_kana'   => $row[16],
+							'first_name_kanji'  => $row[18],
+						));
+
+						// メンバーの2014年度として保存する
+						$memberRankLog = Model_MemberRankLog::forge()->set(array(
+							'member_id' => $member_id,
+							'rank_id'   => (int) $grade["menber_rank_id"],
+							'year'      => 2014,
+							'pia_id'    => $row[1],
+						));
+
+						// var_dump($member);
+
+						try
+						{
+							// DBに保存
+							//echo "保存に成功";
+							$member->save();
+							$memberRankLog->save();
+
+						} catch( Exception $e )
+						{
+							echo "error: " . $e->getMessage() . "<br>";
+						}
+
+					}
+				}
+				//echo "<br><br>";
+				$i ++;
+			}
+		}
 	}
 }
