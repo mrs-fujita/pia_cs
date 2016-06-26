@@ -35,18 +35,6 @@ class Controller_ReadFile extends Controller
 	public function action_upload()
 	{
 
-		//参考URL：http://qiita.com/mpyw/items/caa2568284b69d270f8b
-
-		//$data["row"] = [];
-		//$data["fp"] = [];
-		//$data["csv"] = [ ];
-		//$data["team_name"] = [ ];
-		//$data["year"] = [ ];
-		//$data["grades"] = [ ];
-		//$data["file_name"] = [];
-
-		$grade_name_col_num = 13;
-
 		// パラメータを正しい構造で受け取った時のみ実行
 		if(isset( $_FILES['up_file']['error'] ) && is_int($_FILES['up_file']['error']))
 		{
@@ -161,10 +149,10 @@ class Controller_ReadFile extends Controller
 						// 主キーとなるidを生成 例：JU000001
 						$member_id = $team_name . sprintf('%06d', $i);
 
-						// 性別 男性：0、女性：1、 null：null
+						// 性別 男性：1、女性：0、 null：null
 						$sex_num = null;
 						if(!empty( $row[2] ))
-							$sex_num = $row[2] == "男" ? 0 : 1;
+							$sex_num = $row[2] == "男" ? 1 : 0;
 
 
 						// 郵便番号 "-"を削除しInt型に変換
@@ -221,4 +209,6 @@ class Controller_ReadFile extends Controller
 			}
 		}
 	}
+
+
 }
