@@ -106,7 +106,28 @@ class Controller_ReadFile extends Controller
 				}
 				else
 				{
-					echo "観戦者の処理";
+					foreach($csv as $key => $row)
+					{
+						if($key != 0)
+						{
+							$wip = Model_WatchingInfoProvisional::forge()->set(array(
+								"pia_id"  => $row[0],
+								"club_id" => $club_id,
+								"date"    => $row[2],
+								"year"    => $file_year,
+							));
+
+							try
+							{
+								$wip->save();
+
+							} catch( Exception $e )
+							{
+								// エラーメッセージをセット
+								$msg = array( 'red', $e->getMessage() );
+							}
+						}
+					}
 				}
 
 
