@@ -19,7 +19,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_ReadFile extends Controller
+class Controller_ReadFile extends Controller_App
 {
 	/**
 	 * The basic welcome message
@@ -128,6 +128,28 @@ class Controller_ReadFile extends Controller
 							}
 						}
 					}
+
+					echo "1";
+
+					/*
+					$ob = Model_CsvFile::forge()->set(array(
+						"admin_id" => 1,
+					));
+
+					echo $ob;
+					/*
+																				try
+																				{
+																					$obj->save();
+
+																				} catch( Exception $e )
+																				{
+																					echo "保存に失敗";
+																				}*/
+
+					$this->template = View::forge('template2');
+					$this->template->title = "CSV読み込み完了";
+					$this->template->content = View::forge('readFile/list');
 				}
 
 
@@ -135,16 +157,21 @@ class Controller_ReadFile extends Controller
 			{
 				// エラーメッセージをセット
 				$msg = array( 'red', $e->getMessage() );
+				Response::redirect('readFile/upload');
 			}
-
-
 		}
 		else
 		{
 			// ファイルがなかった場合
+			Response::redirect('readFile/upload');
 		}
+	}
 
-		//return Response::forge(View::forge('readFile/upload', $data));
+	public function action_list()
+	{
+		$this->template = View::forge('template2');
+		$this->template->title = "CSV読み込み完了";
+		$this->template->content = View::forge('readFile/list');
 	}
 
 	private function saveMemberFromCsvBefore2014($csv, $club_id, $team_name)
@@ -221,15 +248,15 @@ class Controller_ReadFile extends Controller
 						} catch( Exception $e )
 						{
 							echo "error: " . $e->getMessage() . "<br>";
+							Response::redirect('readFile/upload');
 						}
 
 					}
 				}
-				//echo "<br><br>";
 				$i ++;
 			}
 		}
+
+		Response::redirect('readFile/list');
 	}
-
-
 }
