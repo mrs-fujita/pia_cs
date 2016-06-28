@@ -17,8 +17,6 @@
 			<td><?php echo $csvFile["add_time"] ?></td>
 		</tr>
 	<?php endforeach; ?>
-
-	<?php echo date('Y/m/d H:i:s'); ?>
 	</tbody>
 
 </table>

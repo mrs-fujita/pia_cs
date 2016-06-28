@@ -32,31 +32,28 @@ class Controller_ReadFile extends Controller_App
 		return Response::forge(View::forge('readFile/index'));
 	}
 
+	/**
+	 * csvFileのアップロードを行うアクション
+	 */
 	public function action_upload()
 	{
-
-		// 初期設定
+		// アップロード出来るファイルの初期設定
 		$config = array(
-			'path'          => dirname(DOCROOT) . '/uploads/',
-			'randomize'     => false,
-			'ext_whitelist' => array( 'csv' ),
+			'path'          => dirname(DOCROOT) . '/uploads/',  //ファイルの保存先
+			'randomize'     => false,  // 保存する際のファイル名の変更
+			'ext_whitelist' => array('csv'),  // 保存するファイルの種類の変更
 		);
 
 		// アップロード基本プロセス実行
 		Upload::process($config);
 
-		// 検証
+		// ファイルのアップロードに成功したかを検証
 		if(Upload::is_valid())
 		{
-
 			// ファイルをアップロード
 			Upload::save();
 			// アップロードしたファイルを取得
 			$file = Upload::get_files(0);
-
-			var_dump($file);
-
-			echo "<br><br>";
 
 			// ファイルの保存先
 			$file_name = $file['saved_as'];
@@ -79,11 +76,6 @@ class Controller_ReadFile extends Controller_App
 			$csv = new SplFileObject($tmp_name, 'r');
 			$csv->setFlags(SplFileObject::READ_CSV);
 
-			foreach($csv as $key => $row)
-			{
-				var_dump($row);
-				echo "<br>";
-			}
 
 			// ファイル名から年度とチーム名を取得
 			$arr = explode("_", $file_name);
@@ -100,7 +92,7 @@ class Controller_ReadFile extends Controller_App
 			{
 				if($file_year == 2014)
 				{
-					$this->saveMemberFromCsvBefore2014($csv, $club_id, $team_name);
+					$this->saveMemberFromCsvBefore2014($csv, $club_id, $team_name, $file_name);
 				}
 				else
 				{
@@ -113,6 +105,9 @@ class Controller_ReadFile extends Controller_App
 				{
 					if($key != 0)
 					{
+
+						//echo "row2: ". $row[2] . "<br>";
+
 						$wip = Model_WatchingInfoProvisional::forge()->set(array(
 							"pia_id"  => $row[0],
 							"club_id" => $club_id,
@@ -132,19 +127,15 @@ class Controller_ReadFile extends Controller_App
 					}
 				}
 			}
-
-
+			
 			$result = Model_CsvTable::save_csv_table_from_file_name($file_name, 1);
-
-			var_dump($result);
 
 			if($result) {
 				echo "csvファイルの名前保存に成功";
 			}else {
 				echo "csvファイルの名前保存に失敗";
 			}
-
-
+			//return Response::forge(View::forge('readFile/list'));
 			Response::redirect("readFile/list");
 		}
 		else //ファイルの読み込みに失敗
@@ -162,11 +153,11 @@ class Controller_ReadFile extends Controller_App
 		//$allCsvFile = Model_CsvTable::find_by();
 
 		$this->template = View::forge('template2');
-		$this->template->title = "CSV読み込み完了";
+		$this->template->title = "CSV読み込み一覧";
 		$this->template->content = View::forge('readFile/list', $data);
 	}
 
-	private function saveMemberFromCsvBefore2014($csv, $club_id, $team_name)
+	private function saveMemberFromCsvBefore2014($csv, $club_id, $team_name, $file_name)
 	{
 		// チームの会員グレードが指定されている列番号
 		$grade_name_col_num = 13;
@@ -183,70 +174,84 @@ class Controller_ReadFile extends Controller_App
 			{
 				foreach($grades as $grade)
 				{
-					// csvの会員グレード名と同じグレードが見つかった場合
-					if($row[ $grade_name_col_num ] == $grade["grade_name"])
+					try
 					{
-						// 主キーとなるidを生成 例：JU000001
-						$member_id = $team_name . sprintf('%06d', $i);
-
-						// 性別 男性：1、女性：0、 null：null
-						$sex_num = null;
-						if(!empty( $row[2] ))
-							$sex_num = $row[2] == "男" ? 1 : 0;
-
-
-						// 郵便番号 "-"を削除しInt型に変換
-						$post_num = null;
-						if(!empty( $row[4] ))
-							$post_num = (int) str_replace("-", "", $row[4]);
-
-
-						// 登録するメンバーを生成
-						$member = Model_Member::forge()->set(array(
-							'id'                => $member_id,
-							'club_id'           => (int) $club_id,
-							'gender'            => $sex_num,
-							'birthday'          => $row[3],
-							'post'              => $post_num,
-							'address1'          => $row[5],
-							'address2'          => $row[6],
-							'address3'          => $row[7],
-							'address4'          => $row[8],
-							'home_tell'         => $row[9],
-							'mobile_tell'       => $row[10],
-							'family_name_kana'  => $row[15],
-							'family_name_kanji' => $row[17],
-							'first_name_kana'   => $row[16],
-							'first_name_kanji'  => $row[18],
-						));
-
-						// メンバーの2014年度として保存する
-						$memberRankLog = Model_MemberRankLog::forge()->set(array(
-							'member_id' => $member_id,
-							'rank_id'   => (int) $grade["menber_rank_id"],
-							'year'      => 2014,
-							'pia_id'    => $row[1],
-						));
-
-						// var_dump($member);
-
-						try
+						//echo "row2" . $row[ $grade_name_col_num ] . "<br>";
+						// csvの会員グレード名と同じグレードが見つかった場合
+						if($row[ $grade_name_col_num ] == $grade["grade_name"])
 						{
-							// DBに保存
-							//echo "保存に成功";
-							$member->save();
-							$memberRankLog->save();
+							// 主キーとなるidを生成 例：JU000001
+							$member_id = $team_name . sprintf('%06d', $i);
 
-						} catch( Exception $e )
-						{
-							echo "error: " . $e->getMessage() . "<br>";
-							Response::redirect('readFile/upload');
+							// 性別 男性：1、女性：0、 null：null
+							$sex_num = null;
+							if(!empty( $row[2] ))
+								$sex_num = $row[2] == "男" ? 1 : 0;
+
+
+							// 郵便番号 "-"を削除しInt型に変換
+							$post_num = null;
+							if(!empty( $row[4] ))
+								$post_num = (int) str_replace("-", "", $row[4]);
+
+
+							// 登録するメンバーを生成
+							$member = Model_Member::forge()->set(array(
+								'id'                => $member_id,
+								'club_id'           => (int) $club_id,
+								'gender'            => $sex_num,
+								'birthday'          => $row[3],
+								'post'              => $post_num,
+								'address1'          => $row[5],
+								'address2'          => $row[6],
+								'address3'          => $row[7],
+								'address4'          => $row[8],
+								'home_tell'         => $row[9],
+								'mobile_tell'       => $row[10],
+								'family_name_kana'  => $row[15],
+								'family_name_kanji' => $row[17],
+								'first_name_kana'   => $row[16],
+								'first_name_kanji'  => $row[18],
+							));
+
+							// メンバーの2014年度として保存する
+							$memberRankLog = Model_MemberRankLog::forge()->set(array(
+								'member_id' => $member_id,
+								'rank_id'   => (int) $grade["menber_rank_id"],
+								'year'      => 2014,
+								'pia_id'    => $row[1],
+							));
+
+							var_dump($member);
+
+							try
+							{
+								// DBに保存
+								//echo "保存に成功";
+								$member->save();
+								$memberRankLog->save();
+
+							} catch( Exception $e )
+							{
+								echo "error: " . $e->getMessage() . "<br>";
+								//Response::redirect('readFile/index');
+							}
 						}
-
+					}catch(Exception $e) {
+						// 何故か$row[ $grade_name_col_num ]でエラーが起きる事があるので・・
+						//echo "if文でエラー";
 					}
 				}
 				$i ++;
 			}
+		}
+
+		$result = Model_CsvTable::save_csv_table_from_file_name($file_name, 1);
+
+		if($result) {
+			echo "csvファイルの名前保存に成功";
+		}else {
+			echo "csvファイルの名前保存に失敗";
 		}
 
 		Response::redirect('readFile/list');
