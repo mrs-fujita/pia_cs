@@ -6,6 +6,9 @@
  * Class Controller_App
  */
 class Controller_App extends Controller_Template {
+
+	//public $template = "template";
+
 	public function before() {
 		parent::before();
 		// 認証処理などの共通処理を記述
