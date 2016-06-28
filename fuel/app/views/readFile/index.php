@@ -7,17 +7,17 @@
 </head>
 <body>
 
-<form method="post" action="readFile/upload" enctype="multipart/form-data">
+<?php echo Form::open(array("name" => "upload", "action" => 'readFile/upload','enctype'=>'multipart/form-data','method'=>'post')); ?>
 	<div class="readCsv">
 		<p id="response" class="readCsv_response"></p>
 		<div id="dropto" class="readCsv_dropFile">ファイルをここにドロップ</div>
 		<div id="progress" class="readCsv_progress">
 			<div id="percent" class="readCsv_percent"></div>
 		</div>
-		または<input name="up_file" type="file" id="input-file">
-		<input type="submit" value="csvファイルを読み込む" class="readCsv_submit">
+		または<?php echo Form::file('upload'); ?>
+		<?php echo Form::submit('submit', 'Upload', array('class' => 'btn btn-primary', "value" => "CSVを読み込む")); ?>
 	</div>
-</form>
+<?php echo Form::close(); ?>
 
 </body>
 </html>

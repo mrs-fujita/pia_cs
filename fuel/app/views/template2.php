@@ -6,6 +6,7 @@
 	<title><?php echo $title; ?></title>
 	<?php // echo Asset::css('normalize.css'); ?>
 	<?php echo Asset::css('main.css'); ?>
+	<?php echo Asset::css('bootstrap.css'); ?>
 </head>
 
 <body>
