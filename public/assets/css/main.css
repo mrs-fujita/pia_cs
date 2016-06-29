@@ -36,7 +36,7 @@ clearfix
 
 /* base */
 .sidebar {
-  width: 300px;
+  width: 224px;
   background-color: red;
   display: inline-block;
   float: left; }
@@ -44,13 +44,16 @@ clearfix
 .content.content-sidebarOn {
   display: inline-block;
   background-color: blue;
-  width: -webkit-calc(100% - 300px);
-  width: calc(100% - 300px); }
+  width: -webkit-calc(100% - 224px);
+  width: calc(100% - 224px); }
 
 /*
 # base
 全体に効かせるCSS
 */
+body {
+  font-family: YuGothic, "游ゴシック", Meiryo, sans-serif; }
+
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Change the default font family in all browsers (opinionated).
@@ -683,5 +686,32 @@ teamSelect画面でチームの詳細を表示する
 .selectBox ul, .selectBox li {
   margin: 0;
   padding: 0; }
+
+.footer {
+  background-color: #000;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .footer .footer_corporation {
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 14px; }
+
+/* スマホサイズの時のみ */
+@media (max-width: 767px) {
+  .footer .footer_corporation {
+    font-size: 11px; } }
+/* スマホサイズの時のみ
+@media (max-width: 767px) {}
+/* スマホ・タブレット共通(基本的にスマホに適用)
+@media (max-width: 991px) {}
+/* タブレットとPC共通
+@media (min-width: 768px) {}
+/* タブレットで変更があるもののみ
+@media (min-width: 768px) and (max-width: 991px) {}
+/* PCで変更がある場合のみ
+@media (min-width: 992px) {}
+*/
 
 /*# sourceMappingURL=main.css.map */

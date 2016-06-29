@@ -27,5 +27,7 @@
 <footer class="footer">
 	<?php echo View::forge('views/footer') //footerの読み込み ?>
 </footer>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<?php echo Asset::js('main.js'); ?>
 </body>
 </html>
