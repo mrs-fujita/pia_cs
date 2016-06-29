@@ -36,17 +36,29 @@ clearfix
 
 /* base */
 .sidebar {
-  width: 224px;
   background-color: red;
-  display: inline-block;
   float: left; }
 
 .content.content-sidebarOn {
-  display: inline-block;
-  background-color: blue;
-  width: -webkit-calc(100% - 224px);
-  width: calc(100% - 224px); }
+  background-color: blue; }
 
+/* スマホサイズの時のみ */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 100%; }
+
+  .content {
+    width: 100%; } }
+/* タブレットとPC共通 */
+@media (min-width: 768px) {
+  .sidebar {
+    display: inline-block;
+    width: 224px; }
+
+  .content {
+    display: inline-block;
+    width: -webkit-calc(100% - 224px);
+    width: calc(100% - 224px); } }
 /*
 # base
 全体に効かせるCSS
@@ -686,6 +698,10 @@ teamSelect画面でチームの詳細を表示する
 .selectBox ul, .selectBox li {
   margin: 0;
   padding: 0; }
+
+.selectBox .selectBox_item .selectBox_item-child {
+  display: none;
+  margin-left: 24px; }
 
 .footer {
   background-color: #000;
