@@ -87,13 +87,12 @@ class Controller_User extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_alluser()
+	public function action_index()
 	{
 		// 全てのユーザを取得
-		//$data[] = Model_User::find('all');
-		//return Response::forge(View::forge('user/index',$data));
+		$data["user_all"] = Model_User::select_alluser();
+		return Response::forge(View::forge('user/index',$data));
 
-		return Response::forge(View::forge('user/index'));
 	}
 
 	/**
@@ -102,12 +101,13 @@ class Controller_User extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_userdetail()
+	public function action_detail()
 	{
     $get = Input::get();
 		$id = $get["id"];
-		$data[] = Model_User::find($id);
-		return Response::forge(View::forge('auth/regist',$data));
+		//id検索でユーザー詳細を取得
+		$data["user_ditail"] = Model_User::find_user($id);
+		return Response::forge(View::forge('auth/result',$data));
 	}
 
 	/**
@@ -116,20 +116,53 @@ class Controller_User extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_useradd()
+	public function action_add()
 	{
     $post = Input::post();
-		$info["id"] = $post["id"];
-		/*
-		*add more need info
-		*...
-		*/
+		$info["name"] = $post["name"];
+		$info["passwd"] = $post["passwd"];
+		$info["start_time"] = $post["start_time"];
+		$info["end_time"] = $post["end_time"];
+		$info["authority"] = $post["authority"];
+
+		//ユーザー情報を登録
 		$update = Model_User::post_adduser($info);
-		$data["msg"] = "失敗しました。";
+		$data["msg"] = "登録に失敗しました。";
 		if($update){
-			$data["msg"] = "成功しました。";
+			$data["msg"] = "登録に成功しました。";
+		}
+		return Response::forge(View::forge('auth/result',$data));
+	}
+
+	/**
+	 * The User del
+	 *
+	 * @access  public
+	 * @return  Response
+	 */
+	public function action_del()
+	{
+		$get = Input::get();
+		$id = $get["id"];
+		//id検索でユーザー詳細を取得
+		$data["user_ditail"] = Model_User::del_user($id);
+		$data["msg"] = "登録に失敗しました。";
+		if($update){
+			$data["msg"] = "登録に成功しました。";
 		}
 		return Response::forge(View::forge('auth/regist',$data));
 	}
+
+	/**
+	 * The
+	 *
+	 * @access  public
+	 * @return  Response
+	 */
+	public function action_index_add()
+	{
+		return Response::forge(View::forge('user/add'));
+	}
+
 
 }
