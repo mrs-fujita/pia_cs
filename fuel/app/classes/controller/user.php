@@ -40,7 +40,7 @@ class Controller_User extends Controller
 	 */
 	public function action_auth()
 	{
-    $post = Input::post();
+		$post = Input::post();
 		$name = $post["name"];
 		$pass = $post["pass"];
 
@@ -48,19 +48,20 @@ class Controller_User extends Controller
 		//指定したテーブルからクエリでパクってくる
 		//arrayだと複数パクれる
 		//=>で書くんやで
-		$ret = Model_Auth::get_auth($name,$pass);
+		$ret = Model_Auth::get_auth($name, $pass);
 		$auth = $ret["accept"];
 		$data["msg"] = "ログインに失敗しました";
 
 
-		if($auth){
+		if($auth)
+		{
 			Session::set('userid', $ret["id"]);
 			Response::redirect('team/select');
 		}
 		// $data["id"] = $id;
-    // $data["pass"] = $pass;
+		// $data["pass"] = $pass;
 		// 返した配列は連想名で呼び出される
-		return Response::forge(View::forge('auth/login',$data));
+		return Response::forge(View::forge('auth/login', $data));
 
 	}
 
@@ -72,15 +73,17 @@ class Controller_User extends Controller
 	 */
 	public function action_regist()
 	{
-    $post = Input::post();
+		$post = Input::post();
 		$name = $post["name"];
 		$pass = $post["pass"];
-		$auth = Model_Auth::post_regist($name,$pass);
+		$auth = Model_Auth::post_regist($name, $pass);
 		$data["res"] = "失敗";
-		if($auth){
+		if($auth)
+		{
 			$data["res"] = "成功";
 		}
-		return Response::forge(View::forge('auth/regist',$data));
+
+		return Response::forge(View::forge('auth/regist', $data));
 	}
 
 	/**
@@ -92,8 +95,9 @@ class Controller_User extends Controller
 	public function action_index()
 	{
 		// 全てのユーザを取得
-		$data["user_all"] = Model_User::select_alluser();
-		return Response::forge(View::forge('user/index',$data));
+		$data["users"] = Model_User::select_alluser();
+
+		return Response::forge(View::forge('user/index', $data));
 
 	}
 
@@ -105,35 +109,68 @@ class Controller_User extends Controller
 	 */
 	public function action_detail()
 	{
-    $get = Input::get();
+		$get = Input::get();
 		$id = $get["id"];
 		//id検索でユーザー詳細を取得
 		$data["user_ditail"] = Model_User::find_user($id);
-		return Response::forge(View::forge('auth/result',$data));
+
+		return Response::forge(View::forge('auth/result', $data));
 	}
 
 	/**
-	 * The User add
-	 *
-	 * @access  public
-	 * @return  Response
+	 * ユーザ追加を行うための画面へ遷移するためのアクション
+	 * @return mixed
 	 */
 	public function action_add()
 	{
-    $post = Input::post();
-		$info["name"] = $post["name"];
-		$info["passwd"] = $post["passwd"];
-		$info["start_time"] = $post["start_time"];
-		$info["end_time"] = $post["end_time"];
-		$info["authority"] = $post["authority"];
+		return Response::forge(View::forge('user/add'));
+	}
 
-		//ユーザー情報を登録
-		$update = Model_User::post_adduser($info);
-		$data["msg"] = "登録に失敗しました。";
-		if($update){
-			$data["msg"] = "登録に成功しました。";
+	/**
+	 * ユーザの新規保存を行うためのアクション
+	 */
+	public function action_save()
+	{
+		$post = Input::post();
+
+		if($post)
+		{
+			if($post["passwd"] == $post["rePasswd"])
+			{
+				// 新たなユーザを作成する
+				$user = Model_User::forge()->set(array(
+					"authority_id"       => 1,
+					"name"               => $post["name"],
+					"password"           => $post["passwd"],
+					"regist_day"         => date('Y-m-d H-i-s'),
+					"change_day"         => date('Y-m-d H-i-s'),
+					"available_startday" => $post["start_time"],
+					"available_endday"   => $post["end_time"],
+				));
+
+				if($user->save())
+				{
+					// ユーザの新規登録が行えた時
+					Response::redirect('user/index');
+				}
+				else
+				{
+					// 保存に失敗した時
+					Response::redirect('user/add');
+				}
+
+			}
+			else
+			{
+				// パスワードと確認用のパスワードが違う時
+				Response::redirect('user/add');
+			}
 		}
-		return Response::forge(View::forge('auth/result',$data));
+		else
+		{
+			// POSTのデータがない時（直接URLを叩かれた時など〉
+			Response::redirect('user/add');
+		}
 	}
 
 	/**
@@ -149,10 +186,12 @@ class Controller_User extends Controller
 		//id検索でユーザー詳細を取得
 		$data["user_ditail"] = Model_User::del_user($id);
 		$data["msg"] = "登録に失敗しました。";
-		if($update){
+		if($update)
+		{
 			$data["msg"] = "登録に成功しました。";
 		}
-		return Response::forge(View::forge('auth/regist',$data));
+
+		return Response::forge(View::forge('auth/regist', $data));
 	}
 
 	/**

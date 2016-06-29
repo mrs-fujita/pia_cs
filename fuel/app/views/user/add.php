@@ -8,27 +8,40 @@
 <p>user/index</p>
 <h1>ユーザー追加</h1>
 
+<?php echo Form::open('user/save'); ?>
+
 <?php
-	echo Form::open('user/add');
-	echo "名前";
-	echo Form::input("name");
-	echo "<br>パスワード";
-	echo Form::input("passwd");
-	echo "<br>パスワード確認";
-	echo Form::input("again_passwd");
-	echo "<br>使用開始";
-	echo Form::input("start_time");
-	echo "<br>使用終了";
-	echo Form::input("end_time");
-	echo "<br>権限";
-	echo Form::input("authority");
-
-	echo Form::submit();
-	echo Form::close();
-
+echo Form::label('名前：', 'name', array( 'class' => 'user_nameLabel' ));
+echo Form::input("name", "", array( 'id' => 'name', 'class' => 'user_nameInput form_input' ));
 ?>
+<br>
 
+<?php
+echo Form::label('パスワード：', 'passwd', array( 'class' => 'user_nameLabel' ));
+echo Form::input("passwd", "", array( 'id' => 'passwd', 'class' => 'user_passwdInput form_input' ));
+?>
+<br>
 
+<?php
+echo Form::label('パスワード確認：', 'rePasswd', array( 'class' => 'user_nameLabel' ));
+echo Form::input("rePasswd", "", array( 'id' => 'rePasswd', 'class' => 'user_rePasswdInput form_input' ));
+?>
+<br>
+
+<?php
+echo Form::label('使用開始：', 'start_time', array( 'class' => 'user_nameLabel' ));
+echo Form::input("start_time", "", array( 'id' => 'start_time', 'class' => 'user_startTimeInput form_input'));
+?>
+<br>
+
+<?php
+echo Form::label('使用終了：', 'end_time', array( 'class' => 'user_nameLabel' ));
+echo Form::input("end_time", "", array( 'id' => 'end_time', 'class' => 'user_endTimeInput form_input'));
+?>
+<br>
+
+<?php echo Form::submit(); ?>
+<?php echo Form::close(); ?>
 
 
 </body>
