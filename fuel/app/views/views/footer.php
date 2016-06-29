@@ -1,3 +1,1 @@
-<div>
-	<?php echo "ここはfooterの領域です"; ?>
-</div>
+<p class="footer_corporation">Mrs藤田 2015 ALL RIGHT RESERVED.</p>

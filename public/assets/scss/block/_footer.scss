@@ -1,0 +1,23 @@
+.footer {
+  background-color: $main_black;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .footer_corporation {
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 14px;
+  }
+}
+
+/* スマホサイズの時のみ */
+@media (max-width: 767px) {
+  .footer {
+    .footer_corporation {
+      font-size: 11px;
+    }
+  }
+}
+
