@@ -109,12 +109,16 @@ class Controller_User extends Controller
 	 */
 	public function action_detail()
 	{
-		$get = Input::get();
-		$id = $get["id"];
-		//id検索でユーザー詳細を取得
-		$data["user_ditail"] = Model_User::find_user($id);
-
-		return Response::forge(View::forge('auth/result', $data));
+		$post = Input::post();
+		if($post)
+		{
+			$data["user"] = Model_User::find_one_by("id", $post["id"]);
+			return Response::forge(View::forge('user/detail', $data));
+		}
+		else
+		{
+			Response::redirect('user/index');
+		}
 	}
 
 	/**

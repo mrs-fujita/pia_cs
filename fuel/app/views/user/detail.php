@@ -8,16 +8,11 @@
 <p>ユーザー詳細</p>
 
 <?php
-
-echo $user[id];
-echo $user[name];
-echo $user[start_time];
-echo $user[end_time];
-echo $user[authority];
-
+echo $user["id"];
+echo $user["name"];
+echo $user["available_startday"];
+echo $user["available_endday"];
+echo $user["authority_id"];
 ?>
-
-
-
 </body>
 </html>

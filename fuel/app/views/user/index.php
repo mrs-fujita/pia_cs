@@ -26,6 +26,7 @@
 			<td>
 				<?php
 				echo Form::open('user/detail');
+				echo Form::hidden('id', $user["id"], array());
 				echo Form::submit('submit','詳細',array('class'=>'btn','type'=>'submit'));
 				echo Form::close();
 				?>
