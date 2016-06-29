@@ -12,7 +12,7 @@
 			</li>
 			<li class="navi_item"><a href="analysis">分析</a></li>
 			<li class="navi_item"><a href="#">イベント設定</a></li>
-			<li class="navi_item"><a href="user/alluser">ユーザ設定</a></li>
+			<li class="navi_item"><a href="user/index">ユーザ設定</a></li>
 			<li class="navi_item"><?php echo Html::anchor('readFile', 'CSV読み込み'); ?></li>
 		</ul>
 
