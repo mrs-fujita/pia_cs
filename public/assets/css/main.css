@@ -687,6 +687,10 @@ teamSelect画面でチームの詳細を表示する
   margin: 0;
   padding: 0; }
 
+.selectBox .selectBox_item .selectBox_item-child {
+  display: none;
+  margin-left: 24px; }
+
 .footer {
   background-color: #000;
   height: 80px;
