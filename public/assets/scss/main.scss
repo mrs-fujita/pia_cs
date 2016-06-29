@@ -1,3 +1,36 @@
 
-@import "Block/readCsv";
-@import "Block/navi";
+/* setting */
+@import "setting/color";
+@import "setting/font";
+
+/* tool */
+@import "tool/mixin";
+
+/* base */
+@import "base/base";
+@import "base/generic";
+@import "base/normalize";
+
+/* block */
+@import "block/readCsv";
+@import "block/navi";
+@import "block/header";
+@import "block/dropdown";
+@import "block/teamInfo";
+@import "block/fancyButton";
+@import "block/selectBox";
+@import "block/footer";
+
+
+
+/* スマホサイズの時のみ
+@media (max-width: 767px) {}
+/* スマホ・タブレット共通(基本的にスマホに適用)
+@media (max-width: 991px) {}
+/* タブレットとPC共通
+@media (min-width: 768px) {}
+/* タブレットで変更があるもののみ
+@media (min-width: 768px) and (max-width: 991px) {}
+/* PCで変更がある場合のみ
+@media (min-width: 992px) {}
+*/

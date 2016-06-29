@@ -1,0 +1,20 @@
+
+.main {
+  @extend %clearfix;
+}
+
+.sidebar {
+  width: 224px;
+  background-color: red;
+  display: inline-block;
+  float: left;
+}
+
+.content {
+  &.content-sidebarOn {
+    display: inline-block;
+    background-color: blue;
+    width: -webkit-calc(100% - 224px);
+    width: calc(100% - 224px);
+  }
+}
