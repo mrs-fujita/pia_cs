@@ -10,23 +10,10 @@
  * @link       http://fuelphp.com
  */
 
-/**
- * The Welcome Controller.
- *
- * A basic controller example.  Has examples of how to set the
- * response body and status.
- *
- * @package  app
- * @extends  Controller
- */
+
 class Controller_ReadFile extends Controller_App
 {
-	/**
-	 * The basic welcome message
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
+
 	public function action_index()
 	{
 		return Response::forge(View::forge('readFile/index'));
@@ -41,7 +28,7 @@ class Controller_ReadFile extends Controller_App
 		$config = array(
 			'path'          => dirname(DOCROOT) . '/uploads/',  //ファイルの保存先
 			'randomize'     => false,  // 保存する際のファイル名の変更
-			'ext_whitelist' => array('csv'),  // 保存するファイルの種類の変更
+			'ext_whitelist' => array( 'csv' ),  // 保存するファイルの種類の変更
 		);
 
 		// アップロード基本プロセス実行
@@ -55,8 +42,9 @@ class Controller_ReadFile extends Controller_App
 			// アップロードしたファイルを取得
 			$file = Upload::get_files(0);
 
-			// ファイルの保存先
+			// ファイル名
 			$file_name = $file['saved_as'];
+			// ファイルの保存先
 			$tmp_name = $file['saved_to'] . $file['saved_as'];
 			$detect_order = 'ASCII,JIS,UTF-8,CP51932,SJIS-win';
 			setlocale(LC_ALL, 'ja_JP.UTF-8');
@@ -101,42 +89,11 @@ class Controller_ReadFile extends Controller_App
 			}
 			else
 			{
-				foreach($csv as $key => $row)
-				{
-					if($key != 0)
-					{
-
-						//echo "row2: ". $row[2] . "<br>";
-
-						$wip = Model_WatchingInfoProvisional::forge()->set(array(
-							"pia_id"  => $row[0],
-							"club_id" => $club_id,
-							"date"    => $row[2],
-							"year"    => $file_year,
-						));
-
-						try
-						{
-							$wip->save();
-
-						} catch( Exception $e )
-						{
-							// エラーメッセージをセット
-							$msg = array( 'red', $e->getMessage() );
-						}
-					}
-				}
+				//観戦情報の処理
+				$this->save_watching_info_from_csv($csv, $club_id, $file_year, $file_name);
 			}
-			
-			$result = Model_CsvTable::save_csv_table_from_file_name($file_name, 1);
-
-			if($result) {
-				echo "csvファイルの名前保存に成功";
-			}else {
-				echo "csvファイルの名前保存に失敗";
-			}
-			//return Response::forge(View::forge('readFile/list'));
 			Response::redirect("readFile/list");
+
 		}
 		else //ファイルの読み込みに失敗
 		{
@@ -150,7 +107,6 @@ class Controller_ReadFile extends Controller_App
 	public function action_list()
 	{
 		$data["csvFiles"] = Model_CsvTable::find_by();
-		//$allCsvFile = Model_CsvTable::find_by();
 
 		$this->template = View::forge('template2');
 		$this->template->title = "CSV読み込み一覧";
@@ -237,7 +193,8 @@ class Controller_ReadFile extends Controller_App
 								//Response::redirect('readFile/index');
 							}
 						}
-					}catch(Exception $e) {
+					} catch( Exception $e )
+					{
 						// 何故か$row[ $grade_name_col_num ]でエラーが起きる事があるので・・
 						//echo "if文でエラー";
 					}
@@ -248,12 +205,53 @@ class Controller_ReadFile extends Controller_App
 
 		$result = Model_CsvTable::save_csv_table_from_file_name($file_name, 1);
 
-		if($result) {
+		if($result)
+		{
 			echo "csvファイルの名前保存に成功";
-		}else {
+		}
+		else
+		{
 			echo "csvファイルの名前保存に失敗";
 		}
 
 		Response::redirect('readFile/list');
+	}
+
+	private function save_watching_info_from_csv($csv, $club_id, $file_year, $file_name)
+	{
+		foreach($csv as $key => $row)
+		{
+			if($key != 0)
+			{
+				$wip = Model_WatchingInfoProvisional::forge()->set(array(
+					"pia_id"  => $row[0],
+					"club_id" => $club_id,
+					"date"    => $row[2],
+					"year"    => $file_year,
+				));
+
+				try
+				{
+					$wip->save();
+
+				} catch( Exception $e )
+				{
+					// エラーメッセージをセット
+					$msg = array( 'red', $e->getMessage() );
+				}
+			}
+		}
+		$result = Model_CsvTable::save_csv_table_from_file_name($file_name, 1);
+
+		if($result)
+		{
+			echo "csvファイルの名前保存に成功";
+		}
+		else
+		{
+			echo "csvファイルの名前保存に失敗";
+		}
+		//return Response::forge(View::forge('readFile/list'));
+		Response::redirect("readFile/list");
 	}
 }
