@@ -81,7 +81,10 @@ class Controller_Event extends Controller
    */
   public function action_update()
   {
-    return Response::forge(View::forge('event/update'));
+		$get = Input::get();
+		$id = $get["id"];
+		$data["update"] = Model_Event::find_by('id',$id);
+    return Response::forge(View::forge('event/update',$data));
   }
 
 	/**
@@ -94,13 +97,18 @@ class Controller_Event extends Controller
   {
     $post = Input::post();
 		$id = $post["id"];
-    $entry = Model_Event::find_by('id',$id);
+    $entry = Model_Event::find_by_pk($post["id"]);
     $data["msg"] = "更新に失敗しました。";
-    if($entry->set($post)){
-      $data["msg"] = "更新に成功しました。";
+    if($entry){
+			$entry["venue"] = $post["venue"];
+			$entry["post"] = $post["post"];
+			$entry["dating"] = $post["dating"];
+			$entry["content"] = $post["content"];
+			$entry->save();
     }
-    $entry->save();
-    return Response::forge(View::forge('event/update',$data));
+		//var_dump($entry);
+		$data["details"] = Model_Event::find_by('id',$id);
+    return Response::forge(View::forge('event/detail',$data));
 	}
 
   /**
