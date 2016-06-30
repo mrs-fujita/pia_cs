@@ -14,7 +14,7 @@
 		</li>
 		<li class="selectBox_item js-selectBoxParent"><a href="">勝敗</a>
 			<ul class="selectBox_item-child js-selectBoxChildren">
-				<li class="js-selectBoxChild"><a href="">勝敗一覧</a></li>
+				<li class="js-selectBoxChild"><a href="#" class="js-resultList">勝敗一覧</a></li>
 				<li class="js-selectBoxChild"><a href="">勝敗詳細</a></li>
 			</ul>
 		</li>

@@ -1,7 +1,5 @@
 <div>
 	<div class="navi">
-
-
 		<ul class="navi_list">
 			<li class="navi_item">
 				<a href="analysis">
@@ -15,6 +13,5 @@
 			<li class="navi_item"><a href="user/index">ユーザ設定</a></li>
 			<li class="navi_item"><?php echo Html::anchor('readFile', 'CSV読み込み'); ?></li>
 		</ul>
-
 	</div>
 </div>

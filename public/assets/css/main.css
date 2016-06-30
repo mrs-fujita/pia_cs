@@ -39,9 +39,6 @@ clearfix
   background-color: red;
   float: left; }
 
-.content.content-sidebarOn {
-  background-color: blue; }
-
 /* スマホサイズの時のみ */
 @media (max-width: 767px) {
   .sidebar {
@@ -718,6 +715,9 @@ teamSelect画面でチームの詳細を表示する
 @media (max-width: 767px) {
   .footer .footer_corporation {
     font-size: 11px; } }
+.param {
+  display: none; }
+
 /* スマホサイズの時のみ
 @media (max-width: 767px) {}
 /* スマホ・タブレット共通(基本的にスマホに適用)
