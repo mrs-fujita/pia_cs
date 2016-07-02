@@ -12,11 +12,7 @@ class Controller_Analysis extends Controller_App
 		if($post) {
 			$team_id = $post["team_id"];
 		}
-
-
 		$this->template = View::forge('template');
-
-
 
 		// 必要なデータを取得
 		$data["test"] = "test";

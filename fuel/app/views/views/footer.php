@@ -1,1 +1,1 @@
-<p class="footer_corporation">Mrs藤田 2015 ALL RIGHT RESERVED.</p>
+Mrs藤田 2015 ALL RIGHT RESERVED.

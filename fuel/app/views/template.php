@@ -4,31 +4,94 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<?php // echo Asset::css('normalize.css'); ?>
-	<?php echo Asset::css('main.css'); ?>
+	<!-- Bootstrap core CSS -->
+	<?php echo Asset::css('lib/bootstrap.min.css'); ?>
+	<?php echo Asset::css('lib/bootstrap-reset.css'); ?>
+
+	<!--Animation css-->
+	<?php echo Asset::css('lib/animate.css'); ?>
+
+	<!--Icon-fonts css-->
+	<?php echo Asset::css('lib/font-awesome.css'); ?>
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+
+	<!--Morris Chart CSS -->
+	<?php echo Asset::css('lib/morris.css'); ?>
+
+	<!-- Custom styles for this template -->
+	<?php echo Asset::css('lib/style.css'); ?>
+	<?php echo Asset::css('lib/helper.css'); ?>
+
+
+	<!-- DataTables 並び替え可能テーブル -->
+	<?php echo Asset::css('lib/assets/jquery.dataTables.min.css'); ?>
+
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- オリジナルCSS -->
+	<?php // echo Asset::css('main.css'); ?>
 </head>
 
 <body>
-<header class="header">
-	<?php echo View::forge('views/header') //headerの読み込み ?>
-</header>
 
-<div class="main" id="main">
+<!-- Aside Start-->
+<aside class="left-panel">
+	<?php echo View::forge('views/left-panel') //left-panelの読み込み ?>
+</aside>
+<!-- Aside Ends-->
 
-	<div class="sidebar">
-		<?php echo View::forge('views/sidebar') //sidebarの読み込み ?>
-	</div>
+<!--Main Content Start -->
+<section class="content">
+	<!-- Header -->
+	<header class="top-head container-fluid">
+		<?php echo View::forge('views/header') //headerの読み込み ?>
+	</header>
+	<!-- Header Ends -->
 
-	<div class="content content-sidebarOn">
+	<!-- Page Content Start -->
+	<!-- ================== -->
+	<div class="wraper container-fluid">
 		<?php echo $content; //contentsの読み込み ?>
 	</div>
-</div>
+	<!-- Page Content Ends -->
+	<!-- ================== -->
 
-<footer class="footer">
-	<?php echo View::forge('views/footer') //footerの読み込み ?>
-</footer>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<footer class="footer">
+		<?php echo View::forge('views/footer') //footerの読み込み ?>
+	</footer>
+</section>
+<!-- Main Content Ends -->
+
+<!-- js placed at the end of the document so the pages load faster -->
+<?php echo Asset::js('lib/jquery.js'); ?>
+<?php echo Asset::js('lib/bootstrap.min.js'); ?>
+<?php echo Asset::js('lib/pace.min.js'); ?>
+<?php echo Asset::js('lib/wow.min.js'); ?>
+<?php echo Asset::js('lib/modernizr.min.js'); ?>
+<?php echo Asset::js('lib/jquery.nicescroll.js'); ?>
+
+
+<!--common script for all pages-->
+<?php echo Asset::js('lib/jquery.app.js'); ?>
+
+
 <?php echo Asset::js('main.js'); ?>
 <?php echo Asset::js('analysis.js'); ?>
+
+
+<!-- 並び替え可能テーブル -->
+<?php echo Asset::js('lib/assets/jquery.dataTables.min.js'); ?>
+<?php echo Asset::js('lib/assets/dataTables.bootstrap.js'); ?>
+<!-- 並び替え可能テーブルを作動させるために必要 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#datatable').dataTable();
+	} );
+</script>
 </body>
 </html>

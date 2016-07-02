@@ -700,21 +700,6 @@ teamSelect画面でチームの詳細を表示する
   display: none;
   margin-left: 24px; }
 
-.footer {
-  background-color: #000;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .footer .footer_corporation {
-    color: #fff;
-    letter-spacing: 2px;
-    font-size: 14px; }
-
-/* スマホサイズの時のみ */
-@media (max-width: 767px) {
-  .footer .footer_corporation {
-    font-size: 11px; } }
 .param {
   display: none; }
 
