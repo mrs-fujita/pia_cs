@@ -109,12 +109,12 @@ class Controller_User extends Controller
 	 */
 	public function action_detail()
 	{
-		$get = Input::get();
-		$id = $get["id"];
+		$post = Input::post();
+		$id = $post["id"];
 		//id検索でユーザー詳細を取得
 		$data["user_ditail"] = Model_User::find_user($id);
 
-		return Response::forge(View::forge('auth/result', $data));
+		return Response::forge(View::forge('user/detail', $data));
 	}
 
 	/**
@@ -179,30 +179,19 @@ class Controller_User extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_del()
+	public function action_delete()
 	{
-		$get = Input::get();
-		$id = $get["id"];
+		$post = Input::post();
+		$id = $post["id"];
 		//id検索でユーザー詳細を取得
-		$data["user_ditail"] = Model_User::del_user($id);
-		$data["msg"] = "登録に失敗しました。";
-		if($update)
+		$data["user_delete"] = Model_User::del_user($id);
+		$data["msg"] = "削除に失敗しました。";
+		if($data)
 		{
-			$data["msg"] = "登録に成功しました。";
+			$data["msg"] = "削除に成功しました。";
 		}
 
-		return Response::forge(View::forge('auth/regist', $data));
-	}
-
-	/**
-	 * The
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_index_add()
-	{
-		return Response::forge(View::forge('user/add'));
+		return Response::forge(View::forge('user/result', $data));
 	}
 
 
