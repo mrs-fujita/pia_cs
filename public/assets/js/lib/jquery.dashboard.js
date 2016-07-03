@@ -23,19 +23,27 @@
             element: 'morris-area-example',
             lineWidth: 0,
             data: [
-                { y: '2009', a: 10, b: 20 },
+                { y: '2006', a: 10, b: 20 },
+                { y: '2007', a: 75,  b: 65 },
+                { y: '2008', a: 50,  b: 40 },
+                { y: '2009', a: 60, b: 60 },
                 { y: '2010', a: 75,  b: 65 },
                 { y: '2011', a: 50,  b: 40 },
-                { y: '2012', a: 75,  b: 65 },
+                { y: '2012', a: 95,  b: 95 },
                 { y: '2013', a: 50,  b: 40 },
                 { y: '2014', a: 75,  b: 65 },
-                { y: '2015', a: 90, b: 60 }
+                { y: '2015', a: 20, b: 30 }
             ],
             xkey: 'y',
             ykeys: ['a', 'b'],
             labels: ['Series A', 'Series B'],
             resize: true,
-            lineColors: ['#2f353f', '#6e8cd7']
+            pointSize: 0,
+            smooth: true,
+            fillOpacity: 0.7,
+            hideHover: 'auto',
+            gridLineColor: '#eef0f2',
+            lineColors: ['#ebc142', '#03a9f4']
         });
 
         //Bar chart
@@ -46,13 +54,18 @@
                     { y: 'Day2', a: 50,  b: 40 , c: 50 },
                     { y: 'Day3', a: 75,  b: 65 , c: 95 },
                     { y: 'Day4', a: 50,  b: 40 , c: 22 },
-                    { y: 'Day5', a: 75,  b: 65 , c: 56 },
-                    { y: 'Day6', a: 100, b: 90 , c: 60 }
+                    { y: 'Day5', a: 75,  b: 65 , c: 56 }
             ],
             xkey: 'y',
             ykeys: ['a', 'b', 'c'],
-            labels: ['Series A', 'Series B', 'Series c'],
-            barColors: ['#6e8cd7', '#2f353f', '#dcdcdc']
+            labels: ['Series A', 'Series B', 'Series C'],
+            gridLineColor: '#eef0f2',
+            barSizeRatio: 0.5,
+            numLines: 6,
+            barGap: 6,
+            resize: true,
+            hideHover: 'auto',
+            barColors: ['#ebc142', '#03a9f4', '#009688']
         });
 
 
