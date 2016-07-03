@@ -83,6 +83,14 @@
 <?php echo Asset::js('main.js'); ?>
 <?php echo Asset::js('analysis.js'); ?>
 
+<!-- フォームのバリデーションを行うために使用 -->
+<!--form validation-->
+<script type="text/javascript" src="assets/jquery.validate/jquery.validate.min.js"></script>
+<?php echo Asset::js('lib/assets/jquery.validate.min.js'); ?>
+<!--form validation init-->
+<script src="assets/jquery.validate/form-validation-init.js"></script>
+<?php echo Asset::js('lib/assets/form-validation-init.js'); ?>
+
 
 <!-- 並び替え可能テーブル -->
 <?php echo Asset::js('lib/assets/jquery.dataTables.min.js'); ?>
