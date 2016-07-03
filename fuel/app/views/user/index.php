@@ -26,14 +26,15 @@
 			<td>
 				<?php
 				echo Form::open('user/detail');
-				echo Form::hidden('id', $user["id"], array());
+				echo Form::hidden("id",$user["id"]);
 				echo Form::submit('submit','詳細',array('class'=>'btn','type'=>'submit'));
 				echo Form::close();
 				?>
 			</td>
 			<td>
 				<?php
-				echo Form::open('user/index_add');
+				echo Form::open('user/delete');
+				echo Form::hidden("id",$user["id"]);
 				echo Form::submit('submit','削除',array('class'=>'btn','type'=>'submit'));
 				echo Form::close();
 				?>

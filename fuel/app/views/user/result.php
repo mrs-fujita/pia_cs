@@ -7,9 +7,7 @@
 <body>
 <p>結果</p>
 <?php
-  $post = Input::post();
-  $msg = $post["msg"];
-  echo $msg;
-?>
+	echo $msg;
+	?>
 </body>
 </html>
