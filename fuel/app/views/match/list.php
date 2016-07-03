@@ -21,7 +21,7 @@
 									<th>対戦クラブ名</th>
 									<th>スタジアム</th>
 									<th>試合結果</th>
-									<th>順位</th>
+									<th>前試合までの勝率</th>
 									<th>観客数</th>
 									<th>天気</th>
 									<th>ホーム/アウェイ</th>
@@ -46,7 +46,7 @@
 										<td><?php echo $competition["opponent_club_name"] ?></td>
 										<td><?php echo $competition["stadium_name"] ?></td>
 										<td><?php echo $defeat ?></td>
-										<td><?php echo $competition["my_club_name"] ?></td>
+										<td><?php echo $competition["winning_percentage"] ?></td>
 										<td><?php echo $competition["audience_sum"] ?></td>
 										<td><?php echo $competition["weather"] ?></td>
 										<td><?php echo $place ?></td>
