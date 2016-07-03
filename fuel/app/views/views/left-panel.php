@@ -38,6 +38,7 @@
 				<i class="ion-compose"></i> <span class="nav-label">勝敗</span>
 			</a>
 			<ul class="list-unstyled">
+				<li><?php echo Html::anchor('match/winPerGraph', '勝敗観客動員'); ?></li>
 				<li><?php echo Html::anchor('match/list', '勝敗一覧'); ?></li>
 				<li><a href="form-validation.html">勝敗詳細</a></li>
 			</ul>

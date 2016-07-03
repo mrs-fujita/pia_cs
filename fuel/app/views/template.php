@@ -18,6 +18,10 @@
 	<!--Morris Chart CSS -->
 	<?php echo Asset::css('lib/morris.css'); ?>
 
+	<!--C3 Chart CSS -->
+	<?php echo Asset::css('lib/assets/c3-chart/c3.css'); ?>
+	<link href="assets/c3-chart/c3.css" rel="stylesheet" />
+
 	<!-- Custom styles for this template -->
 	<?php echo Asset::css('lib/style.css'); ?>
 	<?php echo Asset::css('lib/helper.css'); ?>
@@ -99,5 +103,15 @@
 		$('#datatable').dataTable();
 	} );
 </script>
+
+<!--C3 Chart-->
+<?php echo Asset::js('lib/assets/c3-chart/d3.v3.min.js'); ?>
+<?php echo Asset::js('lib/assets/c3-chart/c3.js'); ?>
+<?php echo Asset::js('lib/assets/c3-chart/c3-chart.init.js'); ?>
+
+<script src="assets/c3-chart/d3.v3.min.js"></script>
+<script src="assets/c3-chart/c3.js"></script>
+<script src="assets/c3-chart/c3-chart.init.js"></script>
+
 </body>
 </html>

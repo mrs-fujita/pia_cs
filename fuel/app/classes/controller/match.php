@@ -33,7 +33,12 @@ class Controller_Match extends Controller_App
 
 		$this->template->title = "勝敗一覧";
 		$this->template->content = View::forge('match/list', $data);
+	}
 
+	public function action_winPerGraph()
+	{
+		$this->template->title = "勝率観客動員グラフ";
+		$this->template->content = View::forge('match/winPerGraph');
 	}
 }
 ?>
