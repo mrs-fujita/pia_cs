@@ -17,7 +17,9 @@
     FormValidator.prototype.init = function() {
         //validator plugin
         $.validator.setDefaults({
-            submitHandler: function() { alert("submitted!"); }
+            submitHandler: function() { // alert("submitted!");
+              return true;
+                }
         });
 
         // validate the comment form when it is submitted
