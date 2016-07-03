@@ -1,7 +1,8 @@
 <!-- brand -->
 <div class="logo">
 	<a href="<?php echo Uri::base(false) ?>analysis" class="logo-expanded">
-		<i class="ion-social-buffer"></i>
+<!--		<i class="ion-social-buffer"></i>-->
+		<?php echo Asset::img('logo.png'); ?>
 		<span class="nav-label">Pia Analytics</span>
 	</a>
 </div>
