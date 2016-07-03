@@ -98,7 +98,6 @@ class Controller_User extends Controller
 		$data["users"] = Model_User::find_by();
 
 		return Response::forge(View::forge('user/index', $data));
-
 	}
 
 	/**
