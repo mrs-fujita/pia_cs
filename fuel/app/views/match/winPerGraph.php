@@ -10,7 +10,7 @@
 			<div class="portlet"><!-- /primary heading -->
 				<div class="portlet-heading">
 					<h3 class="portlet-title text-dark">
-						Combine Chart
+						2014年度 観客動員数 + 勝率
 					</h3>
 					<div class="portlet-widgets">
 						<a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
@@ -31,6 +31,10 @@
 
 	</div>  <!-- End row -->
 
+	<script type="text/javascript">
+		var json = <?php echo json_encode($competitions_2014, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
 
+		console.log(json);
+	</script>
 
 </div>

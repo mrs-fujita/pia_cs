@@ -123,6 +123,3 @@ function($) {
     $.ChartC3.init()
 }(window.jQuery);
 
-
-
-

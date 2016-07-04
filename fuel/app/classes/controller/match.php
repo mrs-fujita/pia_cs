@@ -37,8 +37,28 @@ class Controller_Match extends Controller_App
 
 	public function action_winPerGraph()
 	{
+		$club_id = Input::post('id');
+
+		$data["competitions_2014"] = Model_ViewCompetitionDetail::find(array(
+			"select" => array("audience_sum", "event_day", "winning_percentage"),
+			"where" => array(
+				"club_id_a" => 25,
+				array('event_day', 'like', '%2014%'),
+			),
+		));
+
+		$data["competitions_2014"] = Format::forge($data["competitions_2014"])->to_array();
+
+			//var_dump($data["competitions_2014"]);
+
+		//$data["competitions_2014"] = Format::forge($data["competitions_2014"])->to_json();
+
+		//print_r(Format::forge($data["competitions_2014"])->to_json());
+
+		//$this->template = View::forge('template_test');
+
 		$this->template->title = "勝率観客動員グラフ";
-		$this->template->content = View::forge('match/winPerGraph');
+		$this->template->content = View::forge('match/winPerGraph', $data);
 	}
 }
 ?>
