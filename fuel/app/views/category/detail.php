@@ -37,20 +37,17 @@
 	</header>
 	<div class="container">
     <?php
-    foreach ((array)$category as $cate) {
-    echo $cate["category_id"];
-    echo $cate["name"];
-    echo $cate["color"];
-    echo Form::open(array('action' => 'category/detail', 'method' => 'get'));
-    echo Form::hidden("id",$cate["category_id"]);
-    echo Form::submit("","詳細");
-    echo Form::close();
-    echo Form::open('category/delete');
-    echo Form::submit("","削除");
-    echo Form::close();
+    foreach ((array)$details as $detail) {
+      echo $detail["category_id"];
+      echo $detail["name"];
+      echo $detail["color"];
+      echo Form::open(array('action' => 'category/update', 'method' => 'get'));
+      echo Form::hidden("id",$detail["category_id"]);
+      echo Form::submit("","更新");
+      echo Form::close();
     }
-    echo Form::open('category/add');
-    echo Form::submit("","新規登録");
+    echo Form::open('category/index');
+    echo Form::submit("","戻る");
     echo Form::close();
     ?>
 		<footer>

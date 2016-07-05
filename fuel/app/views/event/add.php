@@ -45,6 +45,9 @@
     echo Form::submit("","登録");
     echo Form::close();
 
+		echo Form::open('category/index');
+    echo Form::submit("","カテゴリ登録");
+    echo Form::close();
 
     echo Form::open('event/index');
     echo Form::submit("","戻る");

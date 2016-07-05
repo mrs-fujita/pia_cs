@@ -1,5 +1,5 @@
 <?php
-class Model_Event extends Model_Crud {
+class Model_Category extends Model_Crud {
 
   protected static $_table_name = "category_table";
 

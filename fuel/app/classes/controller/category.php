@@ -16,7 +16,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Event extends Controller
+class Controller_Category extends Controller
 {
 	/**
 	 * The index page controller
@@ -26,7 +26,7 @@ class Controller_Event extends Controller
 	 */
 	public function action_index()
 	{
-		$data["category"] = Model_Event::find_all();
+		$data["category"] = Model_Category::find_all();
 		return Response::forge(View::forge('category/index',$data));
 	}
 	/**
@@ -36,13 +36,13 @@ class Controller_Event extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	// public function action_detail()
-	// {
-  //   $get = Input::get();
-	// 	$id = $get["id"];
-	// 	$data["details"] = Model_Event::find_by('id',$id);
-	// 	return Response::forge(View::forge('event/detail',$data));
-	// }
+	public function action_detail()
+	{
+    $get = Input::get();
+		$id = $get["id"];
+		$data["details"] = Model_Category::find_by('id',$id);
+		return Response::forge(View::forge('category/detail',$data));
+	}
 
 	/**
 	 * The category add page controller
@@ -64,7 +64,7 @@ class Controller_Event extends Controller
 	public function action_adddo()
 	{
     $post = Input::post();
-		$add = Model_Event::post_add($post);
+		$add = Model_Category::post_add($post);
 		$data["msg"] = "失敗しました。";
 		if($update){
 			$data["msg"] = "成功しました。";
@@ -83,7 +83,7 @@ class Controller_Event extends Controller
   {
 		$get = Input::get();
 		$id = $get["id"];
-		$data["category"] = Model_Event::find_by('id',$id);
+		$data["category"] = Model_Category::find_by('id',$id);
     return Response::forge(View::forge('category/update',$data));
   }
 
@@ -97,7 +97,7 @@ class Controller_Event extends Controller
   {
     $post = Input::post();
 		$id = $post["id"];
-    $entry = Model_Event::find_by_pk($post["id"]);
+    $entry = Model_Category::find_by_pk($post["id"]);
     $data["msg"] = "更新に失敗しました。";
     if($entry){
 			$entry["name"] = $post["name"];
@@ -105,7 +105,7 @@ class Controller_Event extends Controller
 			$entry->save();
     }
 		//var_dump($entry);
-		$data["category"] = Model_Event::find_by('id',$id);
+		$data["category"] = Model_Category::find_by('id',$id);
     return Response::forge(View::forge('category/index',$data));
 	}
 
@@ -118,11 +118,11 @@ class Controller_Event extends Controller
   public function action_delete()
   {
     $post = Input::post();
-    $entry = Model_Event::find_by_pk($post["id"]);
+    $entry = Model_Category::find_by_pk($post["id"]);
 		if ($entry){
 		    $entry->delete();
 		}
-		$data["category"] = Model_Event::find_all();
+		$data["category"] = Model_Category::find_all();
 		return Response::forge(View::forge('category/index',$data));
   }
 
