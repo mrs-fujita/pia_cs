@@ -101,13 +101,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#datatable').dataTable();
-	} );
+	});
 </script>
 
 <!--C3 Chart-->
 <?php echo Asset::js('lib/assets/c3-chart/d3.v3.min.js'); ?>
 <?php echo Asset::js('lib/assets/c3-chart/c3.js'); ?>
-<?php echo Asset::js('lib/assets/c3-chart/winPerGraph.js'); ?>
+
+<?php if(strpos(Uri::current(), 'winPerGraph') !== false): ?>
+	<?php echo Asset::js('lib/assets/c3-chart/winPerGraph.js'); ?>
+<?php else: ?>
+	<?php echo Asset::js('lib/assets/c3-chart/userAge.js'); ?>
+<?php endif; ?>
 <?php // echo Asset::js('lib/assets/c3-chart/c3-chart.init.js'); ?>
 
 

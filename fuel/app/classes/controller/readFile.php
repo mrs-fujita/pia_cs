@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fuel is a fast, lightweight, community driven PHP5 framework.
  *
@@ -9,8 +10,6 @@
  * @copyright  2010 - 2016 Fuel Development Team
  * @link       http://fuelphp.com
  */
-
-
 class Controller_ReadFile extends Controller_App
 {
 
@@ -150,6 +149,14 @@ class Controller_ReadFile extends Controller_App
 							if(!empty( $row[4] ))
 								$post_num = (int) str_replace("-", "", $row[4]);
 
+							$age = null;
+							if(!empty( $row[3] ))
+								$age = 2014 - (int) ( explode("/", $row[3])[0] );
+
+							$age_group = null;
+							if($age != null)
+								$age_group = $age / 10;
+
 
 							// 登録するメンバーを生成
 							$member = Model_Member::forge()->set(array(
@@ -168,6 +175,8 @@ class Controller_ReadFile extends Controller_App
 								'family_name_kanji' => $row[17],
 								'first_name_kana'   => $row[16],
 								'first_name_kanji'  => $row[18],
+								'age'               => $age,
+								'age_group'         => $age_group,
 							));
 
 							// メンバーの2014年度として保存する

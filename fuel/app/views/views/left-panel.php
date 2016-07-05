@@ -27,10 +27,10 @@
 		</li>
 		<li class="has-submenu">
 			<a href="#">
-				<i class="ion-settings"></i> <span class="nav-label">位置情報</span><span class="badge bg-success">New</span>
+				<i class="ion-settings"></i> <span class="nav-label">ユーザ</span><span class="badge bg-success">New</span>
 			</a>
 			<ul class="list-unstyled">
-				<li><a href="grid.html">ユーザ位置一覧</a></li>
+				<li><?php echo Html::anchor('analysis/user/list', 'ユーザ一覧'); ?></li>
 				<li><a href="portlets.html">ユーザ位置相関</a></li>
 			</ul>
 		</li>
