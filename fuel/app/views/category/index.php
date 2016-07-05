@@ -37,20 +37,20 @@
 	</header>
 	<div class="container">
     <?php
-    echo Form::open(array('action' => 'event/adddo', 'method' => 'post'));
-    echo Form::input("venue");
-    echo Form::input("post");
-    echo Form::input("dating","2016-6-21");
-    echo Form::input("content");
-    echo Form::submit("","登録");
+    foreach ((array)$category as $cate) {
+    echo $cate["category_id"];
+    echo $cate["name"];
+    echo $cate["color"];
+    echo Form::open(array('action' => 'category/detail', 'method' => 'get'));
+    echo Form::hidden("id",$cate["category_id"]);
+    echo Form::submit("","詳細");
     echo Form::close();
-
-		echo Form::open('category/index');
-    echo Form::submit("","カテゴリ登録");
+    echo Form::open('category/delete');
+    echo Form::submit("","削除");
     echo Form::close();
-
-    echo Form::open('event/index');
-    echo Form::submit("","戻る");
+    }
+    echo Form::open('category/add');
+    echo Form::submit("","新規登録");
     echo Form::close();
     ?>
 		<footer>

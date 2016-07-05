@@ -37,19 +37,16 @@
 	</header>
 	<div class="container">
     <?php
-    echo Form::open(array('action' => 'event/adddo', 'method' => 'post'));
-    echo Form::input("venue");
-    echo Form::input("post");
-    echo Form::input("dating","2016-6-21");
-    echo Form::input("content");
-    echo Form::submit("","登録");
-    echo Form::close();
-
-		echo Form::open('category/index');
-    echo Form::submit("","カテゴリ登録");
-    echo Form::close();
-
-    echo Form::open('event/index');
+    foreach ((array)$details as $detail) {
+      echo $detail["category_id"];
+      echo $detail["name"];
+      echo $detail["color"];
+      echo Form::open(array('action' => 'category/update', 'method' => 'get'));
+      echo Form::hidden("id",$detail["category_id"]);
+      echo Form::submit("","更新");
+      echo Form::close();
+    }
+    echo Form::open('category/index');
     echo Form::submit("","戻る");
     echo Form::close();
     ?>
