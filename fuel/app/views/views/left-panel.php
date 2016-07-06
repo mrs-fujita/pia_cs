@@ -21,7 +21,7 @@
 				<i class="ion-flask"></i> <span class="nav-label">イベント</span>
 			</a>
 			<ul class="list-unstyled">
-				<li><a href="typography.html">イベント一覧</a></li>
+				<li><?php echo Html::anchor('event/index', 'イベント一覧'); ?></li>
 				<li><a href="buttons.html">イベント観客相関</a></li>
 			</ul>
 		</li>
@@ -56,4 +56,3 @@
 		</li>
 	</ul>
 </nav>
-

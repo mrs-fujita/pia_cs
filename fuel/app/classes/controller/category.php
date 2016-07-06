@@ -16,7 +16,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Category extends Controller
+class Controller_Category extends Controller_App
 {
 	/**
 	 * The index page controller
@@ -27,7 +27,9 @@ class Controller_Category extends Controller
 	public function action_index()
 	{
 		$data["category"] = Model_Category::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 	/**
    *
@@ -41,7 +43,9 @@ class Controller_Category extends Controller
     $get = Input::get();
 		$id = $get["id"];
 		$data["details"] = Model_Category::find_by('id',$id);
-		return Response::forge(View::forge('category/detail',$data));
+		//return Response::forge(View::forge('category/detail',$data));
+		$this->template->title = "カテゴリ詳細";
+		$this->template->content = View::forge('category/detail', $data);
 	}
 
 	/**
@@ -52,7 +56,9 @@ class Controller_Category extends Controller
 	 */
 	public function action_add()
 	{
-		return Response::forge(View::forge('category/add'));
+		//return Response::forge(View::forge('category/add'));
+		$this->template->title = "カテゴリ追加";
+		$this->template->content = View::forge('category/add');
 	}
 
 	/**
@@ -70,7 +76,9 @@ class Controller_Category extends Controller
 			$data["msg"] = "成功しました。";
 		}
 		$data["category"] = Model_Event::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 
   /**
@@ -84,7 +92,9 @@ class Controller_Category extends Controller
 		$get = Input::get();
 		$id = $get["id"];
 		$data["category"] = Model_Category::find_by('id',$id);
-    return Response::forge(View::forge('category/update',$data));
+    //return Response::forge(View::forge('category/update',$data));
+		$this->template->title = "カテゴリ更新";
+		$this->template->content = View::forge('category/update', $data);
   }
 
 	/**
@@ -106,7 +116,9 @@ class Controller_Category extends Controller
     }
 		//var_dump($entry);
 		$data["category"] = Model_Category::find_by('id',$id);
-    return Response::forge(View::forge('category/index',$data));
+    //return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 
   /**
@@ -123,7 +135,9 @@ class Controller_Category extends Controller
 		    $entry->delete();
 		}
 		$data["category"] = Model_Category::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
   }
 
 }
