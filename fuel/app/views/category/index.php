@@ -42,6 +42,7 @@
 										<td>
 											<?php
 													echo Form::open('category/delete');
+													echo Form::hidden("id",$cate["category_id"]);
 											    echo Form::submit("","削除");
 											    echo Form::close();
 											?>

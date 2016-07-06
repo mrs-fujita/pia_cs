@@ -5,6 +5,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">イベント登録</h3>
+					<?php
+					echo Form::open('category/index');
+					echo Form::submit("","カテゴリ登録");
+					echo Form::close();
+					?>
 				</div>
 				<div class="panel-body">
 					<div class=" form">
@@ -25,11 +30,6 @@
 									}
 									?>
 									</select>
-									<?php
-									echo Form::open('category/index');
-									echo Form::submit("","カテゴリ登録");
-									echo Form::close();
-									?>
 								</div>
 							</div>
 							<div class="form-group ">
