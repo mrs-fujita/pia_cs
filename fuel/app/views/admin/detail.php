@@ -12,9 +12,9 @@
 
 
 							<!-- 管理者の詳細 -->
-
-							<!-- Task.03 管理者の情報を表示させる -->
-
+							<p>名前</p><?php echo $admin["name"] ?><br />
+							<p>利用可能開始日</p><?php echo $admin["available_startday"] ?><br />
+							<p>利用可能終了日</p><?php echo $admin["available_endday"] ?><br />
 							<!-- End 管理者の詳細 -->
 
 

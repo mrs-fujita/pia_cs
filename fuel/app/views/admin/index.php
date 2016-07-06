@@ -36,7 +36,7 @@
 										</td>
 										<td>
 											<?php
-											echo Form::open('');  //Task.01 管理者を削除するアクションにリンクさせる（"admin/delete"）
+											echo Form::open('admin/delete');  //Task.01 管理者を削除するアクションにリンクさせる（"admin/delete"）
 											echo Form::hidden("id",$admin["id"]);
 											echo Form::submit('submit','削除',array('class'=>'btn','type'=>'submit'));
 											echo Form::close();
