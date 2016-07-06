@@ -2,6 +2,7 @@
 class Model_Category extends Model_Crud {
 
   protected static $_table_name = "category_table";
+  protected static $_primary_key = "category_id";
 
   public static function post_add($info)
     {

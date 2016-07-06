@@ -16,7 +16,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Event extends Controller
+class Controller_Event extends Controller_App
 {
 	/**
 	 * The index page controller
@@ -27,7 +27,9 @@ class Controller_Event extends Controller
 	public function action_index()
 	{
 		$data["events"] = Model_Event::find_all();
-		return Response::forge(View::forge('event/index',$data));
+		//return Response::forge(View::forge('event/index',$data));
+		$this->template->title = "イベント一覧";
+		$this->template->content = View::forge('event/index', $data);
 	}
 	/**
    *
@@ -41,7 +43,9 @@ class Controller_Event extends Controller
     $get = Input::get();
 		$id = $get["id"];
 		$data["details"] = Model_Event::find_by('id',$id);
-		return Response::forge(View::forge('event/detail',$data));
+		//return Response::forge(View::forge('event/detail',$data));
+		$this->template->title = "イベント詳細";
+		$this->template->content = View::forge('event/detail', $data);
 	}
 
 	/**
@@ -52,7 +56,10 @@ class Controller_Event extends Controller
 	 */
 	public function action_add()
 	{
-		return Response::forge(View::forge('event/add'));
+		//return Response::forge(View::forge('event/add'));
+		$data["category"] = Model_Category::find_all();
+		$this->template->title = "イベント追加";
+		$this->template->content = View::forge('event/add',$data);
 	}
 
 	/**
@@ -65,12 +72,16 @@ class Controller_Event extends Controller
 	{
     $post = Input::post();
 		$update = Model_Event::post_add($post);
-		$data["msg"] = "失敗しました。";
-		if($update){
-			$data["msg"] = "成功しました。";
+		if(!$update){
+				$data["msg"] = "失敗しました。";
+				$data["events"] = Model_Event::find_all();
+				$this->template->title = "イベント一覧";
+				$this->template->content = View::forge('event/index', $data);
 		}
 		$data["events"] = Model_Event::find_all();
-		return Response::forge(View::forge('event/index',$data));
+		//return Response::forge(View::forge('event/index',$data));
+		$this->template->title = "イベント一覧";
+		$this->template->content = View::forge('event/index', $data);
 	}
 
   /**
@@ -84,7 +95,9 @@ class Controller_Event extends Controller
 		$get = Input::get();
 		$id = $get["id"];
 		$data["update"] = Model_Event::find_by('id',$id);
-    return Response::forge(View::forge('event/update',$data));
+    //return Response::forge(View::forge('event/update',$data));
+		$this->template->title = "イベント更新";
+		$this->template->content = View::forge('event/update', $data);
   }
 
 	/**
@@ -98,17 +111,23 @@ class Controller_Event extends Controller
     $post = Input::post();
 		$id = $post["id"];
     $entry = Model_Event::find_by_pk($post["id"]);
-    $data["msg"] = "更新に失敗しました。";
     if($entry){
 			$entry["venue"] = $post["venue"];
 			$entry["post"] = $post["post"];
 			$entry["dating"] = $post["dating"];
 			$entry["content"] = $post["content"];
-			$entry->save();
+			if(!$entry->save()){
+				$data["msg"] = "更新に失敗しました。";
+				$data["details"] = Model_Event::find_by('id',$id);
+				$this->template->title = "イベント一覧";
+				$this->template->content = View::forge('event/index', $data);
+			}
     }
 		//var_dump($entry);
 		$data["details"] = Model_Event::find_by('id',$id);
-    return Response::forge(View::forge('event/detail',$data));
+    //return Response::forge(View::forge('event/detail',$data));
+		$this->template->title = "イベント一覧";
+		$this->template->content = View::forge('event/index', $data);
 	}
 
   /**
@@ -122,10 +141,16 @@ class Controller_Event extends Controller
     $post = Input::post();
     $entry = Model_Event::find_by_pk($post["id"]);
 		if ($entry){
-		    $entry->delete();
+			if(!$entry->delete()){
+				$data["events"] = Model_Event::find_all();
+				$this->template->title = "イベント一覧";
+				$this->template->content = View::forge('event/index', $data);
+			}
 		}
 		$data["events"] = Model_Event::find_all();
-		return Response::forge(View::forge('event/index',$data));
+		//return Response::forge(View::forge('event/index',$data));
+		$this->template->title = "イベント一覧";
+		$this->template->content = View::forge('event/index', $data);
   }
 
 }
