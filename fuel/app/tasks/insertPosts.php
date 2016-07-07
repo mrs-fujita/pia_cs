@@ -51,16 +51,25 @@ class InsertPosts
 		{
 			//var_dump($postcode["post"]);
 
-			// 郵便番号からAPIにアクセスURLを作成
-			$url = $base_url . $postcode["post"];
+			echo "postコード: " . $postcode["post"] . "\n";
+			// 郵便番号が7桁ない場合の処理
+			if(strlen($postcode["post"]) != 7) {
+				echo "7桁ありません" . "\n";
+				$new_post = str_pad($postcode["post"], 7, 0, STR_PAD_LEFT);
+				echo "新しいpostcode:" .$new_post . "\n";
+				$url = $base_url . $new_post;
+			}else
+			{
+				// 郵便番号からAPIにアクセスURLを作成
+				$url = $base_url . $postcode["post"];
+			}
 
 			// JSONを取得し処理を行うための連想配列に変換
 			$json = file_get_contents($url);
 			$json = mb_convert_encoding($json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 			$arr = json_decode($json,true);
 
-			echo "postコード: " . $postcode["post"] . "\n";
-
+			
 			// 緯度経度が取得できた場合のみ処理を行う
 			if (array_key_exists('location', $arr["response"])) {
 				$prefecture = $arr["response"]["location"][0]["prefecture"];  //都道府県
