@@ -1,7 +1,7 @@
 <!-- brand -->
 <div class="logo">
 	<a href="<?php echo Uri::base(false) ?>analysis" class="logo-expanded">
-<!--		<i class="ion-social-buffer"></i>-->
+		<!--		<i class="ion-social-buffer"></i>-->
 		<?php echo Asset::img('logo.png'); ?>
 		<span class="nav-label">Pia Analytics</span>
 	</a>
@@ -10,6 +10,19 @@
 
 <!-- Navbar Start -->
 <nav class="navigation">
+
+	<?php $select_team_id = Session::get('select_team_id'); ?>
+	<?php if($select_team_id != null) : ?>
+		<div class="sideTeamInfo hidden-xs">
+			<?php echo Asset::img("club/$select_team_id/icon.png", array(
+				'id'    => 'logo',
+				"class" => "sideTeamInfo_logo"
+			)); ?>
+			<span class="sideTeamInfo_name"><?php echo Session::get('select_team_name'); ?></span>
+		</div>
+	<?php endif; ?>
+
+
 	<ul class="list-unstyled">
 		<li>
 			<a href="index.html">

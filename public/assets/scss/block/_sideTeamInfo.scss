@@ -1,0 +1,36 @@
+/*
+# block-sideTeamInfo
+
+サイドバーに表示するチームの情報
+*/
+
+aside.left-panel {
+  .sideTeamInfo {
+    text-align: center;
+    background-color: #000;
+    padding: 10px 0;
+
+    .sideTeamInfo_logo {
+      width: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+    .sideTeamInfo_name { color: #fff;}
+  }
+
+  &.collapsed {
+    .sideTeamInfo {
+      padding: 20px 0;
+
+      .sideTeamInfo_logo {
+        margin: 0 0 0 19px;
+        width: 32px;
+        height: 30px;
+      }
+      .sideTeamInfo_name { display: none;}
+    }
+  }
+}
+
+.navigation { margin: 0 0px 20px !important;}
+

@@ -57,13 +57,13 @@
 
 <header class="header header-teamSelect js-teamSelect">
 	<h2 class="header-teamSelect_title">チームを選択して下さい</h2>
-	<div class="header-teamSelect_selectBoxWrap dropdown">
+	<div class="header-teamSelect_selectBoxWrap myDropdown">
 		<?php
 		echo Form::select('league', 'none', array(
 			'all' => '全リーグ',
 			'j1'  => 'J1',
 			'j2'  => 'J2'
-		), array( 'class' => 'header-teamSelect_selectBox dropdown-select' ));
+		), array( 'class' => 'header-teamSelect_selectBox myDropdown-select' ));
 		?>
 	</div>
 </header>

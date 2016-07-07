@@ -7,20 +7,23 @@
 @import "tool/mixin";
 
 /* base */
-@import "base/base";
+//@import "base/base";
 @import "base/generic";
 @import "base/normalize";
 
+
 /* block */
 @import "block/readCsv";
-@import "block/navi";
+//@import "block/navi";
 @import "block/header";
-@import "block/dropdown";
+@import "block/myDropdown";
 @import "block/teamInfo";
 @import "block/fancyButton";
 @import "block/selectBox";
 //@import "block/footer";
 @import "block/param";
+//@import "block/headerTeamInfo";
+@import "block/sideTeamInfo";
 
 
 

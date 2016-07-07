@@ -56,6 +56,9 @@ class Controller_User extends Controller
 		if($auth)
 		{
 			Session::set('userid', $ret["id"]);
+			$admin = Model_Admin::find_one_by("id", $ret["id"]);
+			Session::set('user_name', $admin["name"]);
+
 			Response::redirect('team/select');
 		}
 		// $data["id"] = $id;

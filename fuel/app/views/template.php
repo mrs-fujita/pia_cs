@@ -38,7 +38,7 @@
 	<![endif]-->
 
 	<!-- オリジナルCSS -->
-	<?php // echo Asset::css('main.css'); ?>
+	<?php echo Asset::css('main.css'); ?>
 </head>
 
 <body>
