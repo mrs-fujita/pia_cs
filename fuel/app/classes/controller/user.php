@@ -32,6 +32,18 @@ class Controller_User extends Controller
 		return Response::forge(View::forge('auth/login'));
 	}
 
+	public function action_logout()
+	{
+		if(Session::get("userid") != null) {
+
+			Session::delete('userid');
+			Session::delete('user_name');
+			Session::delete('select_team_id');
+
+			Response::redirect('user/login');
+		}
+	}
+
 	/**
 	 * Responce Method Login
 	 *
@@ -115,6 +127,7 @@ class Controller_User extends Controller
 		if($post)
 		{
 			$data["user"] = Model_User::find_one_by("id", $post["id"]);
+
 			return Response::forge(View::forge('user/detail', $data));
 		}
 		else
