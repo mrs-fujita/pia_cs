@@ -16,7 +16,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Category extends Controller
+class Controller_Category extends Controller_App
 {
 	/**
 	 * The index page controller
@@ -27,7 +27,9 @@ class Controller_Category extends Controller
 	public function action_index()
 	{
 		$data["category"] = Model_Category::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 	/**
    *
@@ -40,8 +42,10 @@ class Controller_Category extends Controller
 	{
     $get = Input::get();
 		$id = $get["id"];
-		$data["details"] = Model_Category::find_by('id',$id);
-		return Response::forge(View::forge('category/detail',$data));
+		$data["details"] = Model_Category::find_by('category_id',$id);
+		//return Response::forge(View::forge('category/detail',$data));
+		$this->template->title = "カテゴリ詳細";
+		$this->template->content = View::forge('category/detail', $data);
 	}
 
 	/**
@@ -52,7 +56,9 @@ class Controller_Category extends Controller
 	 */
 	public function action_add()
 	{
-		return Response::forge(View::forge('category/add'));
+		//return Response::forge(View::forge('category/add'));
+		$this->template->title = "カテゴリ追加";
+		$this->template->content = View::forge('category/add');
 	}
 
 	/**
@@ -65,12 +71,10 @@ class Controller_Category extends Controller
 	{
     $post = Input::post();
 		$add = Model_Category::post_add($post);
-		$data["msg"] = "失敗しました。";
-		if($update){
-			$data["msg"] = "成功しました。";
-		}
-		$data["category"] = Model_Event::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		$data["category"] = Model_Category::find_all();
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 
   /**
@@ -83,8 +87,10 @@ class Controller_Category extends Controller
   {
 		$get = Input::get();
 		$id = $get["id"];
-		$data["category"] = Model_Category::find_by('id',$id);
-    return Response::forge(View::forge('category/update',$data));
+		$data["category"] = Model_Category::find_by('category_id',$id);
+    //return Response::forge(View::forge('category/update',$data));
+		$this->template->title = "カテゴリ更新";
+		$this->template->content = View::forge('category/update', $data);
   }
 
 	/**
@@ -97,16 +103,23 @@ class Controller_Category extends Controller
   {
     $post = Input::post();
 		$id = $post["id"];
-    $entry = Model_Category::find_by_pk($post["id"]);
+    $entry = Model_Category::find_by_pk($id);
     $data["msg"] = "更新に失敗しました。";
     if($entry){
 			$entry["name"] = $post["name"];
 			$entry["color"] = $post["color"];
-			$entry->save();
+			if(!$entry->save()){
+				$data["msg"] = "更新に失敗しました。";
+				$data["category"] = Model_Category::find_by('category_id',$id);
+		    $this->template->title = "カテゴリ一覧";
+				$this->template->content = View::forge('category/index', $data);
+			}
     }
 		//var_dump($entry);
-		$data["category"] = Model_Category::find_by('id',$id);
-    return Response::forge(View::forge('category/index',$data));
+		$data["category"] = Model_Category::find_by('category_id',$id);
+    //return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
 	}
 
   /**
@@ -120,10 +133,17 @@ class Controller_Category extends Controller
     $post = Input::post();
     $entry = Model_Category::find_by_pk($post["id"]);
 		if ($entry){
-		    $entry->delete();
+			if(!$entry->delete()){
+					$data["category"] = Model_Category::find_all();
+					//return Response::forge(View::forge('category/index',$data));
+					$this->template->title = "カテゴリ一覧";
+					$this->template->content = View::forge('category/index', $data);
+			}
 		}
 		$data["category"] = Model_Category::find_all();
-		return Response::forge(View::forge('category/index',$data));
+		//return Response::forge(View::forge('category/index',$data));
+		$this->template->title = "カテゴリ一覧";
+		$this->template->content = View::forge('category/index', $data);
   }
 
 }
