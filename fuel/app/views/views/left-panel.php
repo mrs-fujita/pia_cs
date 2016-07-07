@@ -35,6 +35,8 @@
 			</a>
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('event/index', 'イベント一覧'); ?></li>
+				<li><?php echo Html::anchor('event/index', 'イベント編集'); ?></li>
+				<li><?php echo Html::anchor('event/add', 'イベント追加'); ?></li>
 				<li><a href="buttons.html">イベント観客相関</a></li>
 			</ul>
 		</li>
