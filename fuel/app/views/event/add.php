@@ -17,7 +17,7 @@
 							<div class="form-group ">
 								<label for="cname" class="control-label col-lg-2">イベント名</label>
 								<div class="col-lg-10">
-									<input class="form-control" id="cname" type="text" name="イベント名?" aria-required="false">
+									<input class="form-control" id="cname" type="text" name="name" aria-required="false">
 								</div>
 							</div>
 							<div class="form-group ">
@@ -54,6 +54,24 @@
 								<label for="cdate" class="control-label col-lg-2">開催日</label>
 								<div class="col-lg-10">
 									<input class=" form-control" id="cdate" name="dating" type="text" value="2016-6-21" required="" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="cman_num" class="control-label col-lg-2">男性来客数</label>
+								<div class="col-lg-10">
+									<input class=" form-control" id="cman_num" name="man_num" type="text" value="0" required="" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="cwoman_num" class="control-label col-lg-2">女性来客数</label>
+								<div class="col-lg-10">
+									<input class=" form-control" id="cwoman_num" name="woman_num" type="text" value="0" required="" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="cvisitors_num" class="control-label col-lg-2">総来客数</label>
+								<div class="col-lg-10">
+									<input class=" form-control" id="cvisitors_num" name="visitors_num" type="text" value="0" required="" aria-required="true">
 								</div>
 							</div>
 

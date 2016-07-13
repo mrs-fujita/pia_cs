@@ -110,6 +110,8 @@
 
 <?php if(strpos(Uri::current(), 'winPerGraph') !== false): ?>
 	<?php echo Asset::js('lib/assets/c3-chart/winPerGraph.js'); ?>
+<?php elseif(strpos(Uri::current(), 'analyzed') !== false): ?>
+	<?php echo Asset::js('lib/assets/c3-chart/eventAnalyzed.js'); ?>
 <?php else: ?>
 	<?php echo Asset::js('lib/assets/c3-chart/userAge.js'); ?>
 <?php endif; ?>

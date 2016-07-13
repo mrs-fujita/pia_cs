@@ -95,7 +95,7 @@ class Controller_Event extends Controller_App
 		$get = Input::get();
 		$id = $get["id"];
 		$data["update"] = Model_Event::find_by('id',$id);
-    //return Response::forge(View::forge('event/update',$data));
+		$data["category"] = Model_Category::find_all();
 		$this->template->title = "イベント更新";
 		$this->template->content = View::forge('event/update', $data);
   }
@@ -116,6 +116,10 @@ class Controller_Event extends Controller_App
 			$entry["post"] = $post["post"];
 			$entry["dating"] = $post["dating"];
 			$entry["content"] = $post["content"];
+			$entry["name"] = $post["name"];
+			$entry["man_num"] = $post["man_num"];
+			$entry["woman_num"] = $post["woman_num"];
+			$entry["visitors_num"] = $post["visitors_num"];
 			if(!$entry->save()){
 				$data["msg"] = "更新に失敗しました。";
 				$data["details"] = Model_Event::find_by('id',$id);
