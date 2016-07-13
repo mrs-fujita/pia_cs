@@ -23,7 +23,7 @@ return array(
 	 *
 	 * Set this to null to have it automatically detected.
 	 */
-	'base_url' => '/pia_cs/',
+	'base_url' => '/th_4/',
 
 	/**
 	 * url_suffix - Any suffix that needs to be added to
