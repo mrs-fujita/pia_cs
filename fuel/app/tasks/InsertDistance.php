@@ -33,18 +33,106 @@ class InsertDistance
 
 	public function postSet()
 	{
-		// //メンバの郵便番号をSELECT
-		// $memberQuery = \DB::query('select id,post from `member_table`')->execute();
-		// foreach($memberQuery as $memberRow)
-		// {
-		// 	if($memberRow["post"] != null && !empty($memberRow["post"]))
-		// 	{
-		// 		$memberList[] = array(
-		// 			"id"=>$memberRow["id"],
-		// 			"post"=>$memberRow["post"]
-		// 		);
-		// 	}
-		// }
+		//メンバの郵便番号をSELECT
+		$memberQuery = \DB::query('select member_table.id,member_table.club_id,member_table.post,posts.latitude,posts.longitude from `member_table` LEFT JOIN `posts` ON `member_table`.`post` = `posts`.`post`')->execute();
+
+		foreach($memberQuery as $memberRow)
+		{
+			//郵便番号・緯度・経度がが無かったら排除
+			if($memberRow["post"] != null && !empty($memberRow["post"]) && $memberRow["latitude"] != null && !empty($memberRow["latitude"]) && $memberRow["longitude"] != null && !empty($memberRow["longitude"]))
+			{
+				$memberList[] = array(
+					"id"=>$memberRow["id"],
+					"club_id"=>$memberRow["club_id"],
+					"post"=>$memberRow["post"],
+					"latitude"=>$memberRow["latitude"],
+					"longitude"=>$memberRow["longitude"]
+				);
+			}
+		}
+
+		//スタジアムの緯度・経度SELECT
+		//ジュビロ(ヤマハスタジアム)固定
+		$stadiumQuery = \DB::query('select latitude,longitude from `stadium_table` where id=24')->execute();
+		foreach($stadiumQuery as $stadiumRow)
+		{
+			$stadiumLatitude = $stadiumRow["latitude"];
+			$stadiumLongitude = $stadiumRow["longitude"];
+		}
+
+		//距離区分取得
+		$distanceClassesQuery = \DB::query('select id,max_num from `distance_classes` ORDER BY max_num ASC')->execute();
+		foreach($distanceClassesQuery as $distanceClassesRow)
+		{
+			if($distanceClassesRow["max_num"] != null && !empty($distanceClassesRow["max_num"]))
+			{
+				$distanceClassesList[] = array(
+					"id"=>$distanceClassesRow["id"],
+					"max_num"=>$distanceClassesRow["max_num"],
+				);
+			}
+		}
+
+		$nullFlg = false;
+		//null,空欄チェック
+		if(empty($memberList))
+		{
+			$nullFlg = true;
+			echo "memberListNULL"."\n";
+		}
+		if(empty($distanceClassesList))
+		{
+			$nullFlg = true;
+			echo "distanceClassesListNULL"."\n";
+		}
+		if(empty($stadiumLatitude) || empty($stadiumLongitude))
+		{
+			$nullFlg = true;
+			echo "stadiumLatLongNULL"."\n";
+		}
+
+		if($nullFlg == false)
+		{
+			//メンバの郵便番号から緯度・経度の対応
+			foreach($memberList as $memberKey)
+			{
+				//距離計算
+				$distance = InsertDistance::distance($stadiumLatitude,$stadiumLongitude,$memberKey["latitude"],$memberKey["longitude"]);
+				$distance = round($distance / 1000,3);
+
+				foreach ($distanceClassesList as $dCKey) {
+
+					if($distance <= $dCKey["max_num"]){
+						$setList[] = array(
+							"post"=>$memberKey["post"],
+							"distance"=>$distance,
+							"club_id"=>$memberKey["club_id"],
+							"class_id"=>$dCKey["id"]
+						);
+						break;
+					}
+				}
+			}
+
+		//メンバID・緯度・経度・距離・区分インサート
+   		$insert = \DB::insert(
+            'post_peoples'
+        )->columns(array(
+            'post',
+            'distance',
+            'club_id',
+            'class_id'
+        ));
+
+        foreach ($setList as $setKey)
+		{
+            $insert = $insert->values($setKey);
+        }
+
+        $insert->execute();
+
+		}
+
 
 		// //登録した距離をSELECT
 		// $distanceQuery = \DB::query('select id,post from `member_distance_table`')->execute();
@@ -81,98 +169,6 @@ class InsertDistance
 		// 		}	
 		// 	}
 		// }
-
-		// //郵便番号の緯度・経度をSELECT
-		// $postQuery = \DB::query('select post,latitude,longitude from `posts`')->execute();
-		// foreach($postQuery as $postRow)
-		// {
-		// 	$postList[] = array(
-		// 		"post"=>$postRow["post"],
-		// 		"latitude"=>$postRow["latitude"],
-		// 		"longitude"=>$postRow["longitude"]
-		// 	);
-		// }
-
-		// //スタジアムの緯度・経度SELECT
-		// //ジュビロ固定
-		// $stadiumQuery = \DB::query('select latitude,longitude from `stadium_table` where id=24')->execute();
-		// foreach($stadiumQuery as $stadiumRow)
-		// {
-		// 	$stadiumLatitude = $stadiumRow["latitude"];
-		// 	$stadiumLongitude = $stadiumRow["longitude"];
-		// }
-
-		// $nullFlg = false;
-		// //null,空欄チェック
-		// if(empty($memberList))
-		// {
-		// 	$nullFlg = true;
-		// 	echo "memberListNULL"."\n";
-		// }
-		// if(empty($postList))
-		// {
-		// 	$nullFlg = true;
-		// 	echo "postListNULL"."\n";
-		// }
-		// if(empty($stadiumLatitude) || empty($stadiumLongitude))
-		// {
-		// 	$nullFlg = true;
-		// 	echo "stadiumLatLongNULL"."\n";
-		// }
-
-		// if($nullFlg == false)
-		// {
-		// 	//メンバの郵便番号から緯度・経度の対応
-		// 	foreach($memberList as $memberKey)
-		// 	{
-		// 		foreach ($postList as $postKey)
-		// 		{
-		// 			if($memberKey["post"] == $postKey["post"])
-		// 			{
-		// 				if($postKey["latitude"] != null && $postKey["latitude"] != 0 && $postKey["longitude"] != null && $postKey["longitude"] != 0)
-		// 				{
-		// 					//距離・区分、計算・判定
-		// 					$distance = InsertDistance::distance($stadiumLatitude,$stadiumLongitude,$postKey["latitude"],$postKey["longitude"]);
-		// 					$distance = round($distance / 1000,3);
-		// 					$classCode = notToutch;
-		// 				}
-		// 				else
-		// 				{
-		// 					$distance = 10000;
-		// 					$classCode = "ERR or EQU";
-		// 				}
-		// 				$setList[] = array(
-		// 					"member_id"=>$memberKey["id"],
-		// 					"post"=>$memberKey["post"],
-		// 					"latitude"=>$postKey["latitude"],
-		// 					"longitude"=>$postKey["longitude"],
-		// 					"distance"=>$distance,
-		// 					"classCode"=>$classCode
-		// 				);
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-
-		// 	//メンバID・緯度・経度・距離・区分インサート
-	 //   		$insert = \DB::insert(
-	 //            'member_distance_table'
-	 //        )->columns(array(
-	 //            'member_id',
-	 //            'post',
-	 //            'latitude',
-	 //            'longitude',
-	 //            'distance',
-	 //            'class_code',
-	 //        ));
-
-	 //        foreach ($setList as $setKey)
-		// 	{
-	 //            $insert = $insert->values($setKey);
-	 //        }
-
-	 //        $insert->execute();
-	 //  	}
 
 	}
 
