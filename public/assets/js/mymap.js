@@ -122,7 +122,7 @@ var clubImg = {
    最後の1.pngの部分は連番
    */
 
-  basicImgPath: "http://localhost/pia_cs/public/assets/img/club/",
+  basicImgPath: "http://localhost/th_4/public/assets/img/club/",
 
   $icon: $(".js-teamIcon"),
   $mainImg: $(".js-teamMainImg"),

@@ -1,0 +1,26 @@
+/*
+# block - tableStadiumInfo
+
+チーム詳細画面のチームの情報を表示するテーブルのホームスタジアム情報を表示するところ
+*/
+
+.tableStadiumInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .tableStadiumInfo_details {
+    width: 60%;
+  }
+
+.tableStadiumInfo_name {
+  font-size: 18px;
+  color: #000;
+}
+  .tableStadiumInfo_post {
+    font-size: 13px;
+    color: #A2A2A2;
+  }
+
+  .tableStadiumInfo_img { width: 200px;}
+}

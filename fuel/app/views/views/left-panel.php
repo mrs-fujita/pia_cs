@@ -18,7 +18,8 @@
 				'id'    => 'logo',
 				"class" => "sideTeamInfo_logo"
 			)); ?>
-			<span class="sideTeamInfo_name"><?php echo Session::get('select_team_name'); ?></span>
+			<div class="sideTeamInfo_name"><?php echo Session::get('select_team_name'); ?></div>
+			<a href="<?php echo Uri::base(false) ?>team/detail" class="sideTeamInfo_link">詳しい情報</a>
 		</div>
 	<?php endif; ?>
 

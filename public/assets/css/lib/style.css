@@ -1820,7 +1820,8 @@ ul.p-social-link li a {
 .bg-picture {
   position: relative;
   min-height: 300px;
-  margin: -20px -25px 0px -20px;
+  //margin: -20px -25px 0px -20px;
+  margin: -40px -35px 0px -35px;
   background-repeat: no-repeat;
   background-position: center;
   -webkit-background-size: cover;

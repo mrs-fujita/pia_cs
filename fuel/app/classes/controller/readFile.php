@@ -77,9 +77,11 @@ class Controller_ReadFile extends Controller_App
 
 			if($file_type == "member")
 			{
+				$this->saveMemberFromCsvBefore($csv, $club_id, $team_name, $file_name, $file_year);
+
 				if($file_year == 2014)
 				{
-					$this->saveMemberFromCsvBefore2014($csv, $club_id, $team_name, $file_name);
+
 				}
 				else
 				{
@@ -112,7 +114,7 @@ class Controller_ReadFile extends Controller_App
 		$this->template->content = View::forge('readFile/list', $data);
 	}
 
-	private function saveMemberFromCsvBefore2014($csv, $club_id, $team_name, $file_name)
+	private function saveMemberFromCsvBefore($csv, $club_id, $team_name, $file_name, $file_year)
 	{
 		// チームの会員グレードが指定されている列番号
 		$grade_name_col_num = 13;
@@ -158,48 +160,95 @@ class Controller_ReadFile extends Controller_App
 								$age_group = $age / 10;
 
 
-							// 登録するメンバーを生成
-							$member = Model_Member::forge()->set(array(
-								'id'                => $member_id,
-								'club_id'           => (int) $club_id,
-								'gender'            => $sex_num,
-								'birthday'          => $row[3],
-								'post'              => $post_num,
-								'address1'          => $row[5],
-								'address2'          => $row[6],
-								'address3'          => $row[7],
-								'address4'          => $row[8],
-								'home_tell'         => $row[9],
-								'mobile_tell'       => $row[10],
-								'family_name_kana'  => $row[15],
-								'family_name_kanji' => $row[17],
-								'first_name_kana'   => $row[16],
-								'first_name_kanji'  => $row[18],
-								'age'               => $age,
-								'age_group'         => $age_group,
-							));
-
-							// メンバーの2014年度として保存する
-							$memberRankLog = Model_MemberRankLog::forge()->set(array(
-								'member_id' => $member_id,
-								'rank_id'   => (int) $grade["menber_rank_id"],
-								'year'      => 2014,
-								'pia_id'    => $row[1],
-							));
-
-							var_dump($member);
-
-							try
+							if($file_year == 2014)
 							{
-								// DBに保存
-								//echo "保存に成功";
-								$member->save();
-								$memberRankLog->save();
+								// 登録するメンバーを生成
+								$member = Model_MemberProvisinal::forge()->set(array(
+									'id'                => $member_id,
+									'club_id'           => (int) $club_id,
+									'gender'            => $sex_num,
+									'birthday'          => $row[3],
+									'post'              => $post_num,
+									'address1'          => $row[5],
+									'address2'          => $row[6],
+									'address3'          => $row[7],
+									'address4'          => $row[8],
+									'home_tell'         => $row[9],
+									'mobile_tell'       => $row[10],
+									'family_name_kana'  => $row[15],
+									'family_name_kanji' => $row[17],
+									'first_name_kana'   => $row[16],
+									'first_name_kanji'  => $row[18],
+									'age'               => $age,
+									'age_group'         => $age_group,
+								));
 
-							} catch( Exception $e )
-							{
-								echo "error: " . $e->getMessage() . "<br>";
-								//Response::redirect('readFile/index');
+								// メンバーの2014年度として保存する
+								$memberRankLog = Model_MemberRankLog::forge()->set(array(
+									'member_id' => $member_id,
+									'rank_id'   => (int) $grade["menber_rank_id"],
+									'year'      => $file_year,
+									'pia_id'    => $row[1],
+								));
+
+								try
+								{
+									// DBに保存
+									//echo "保存に成功";
+									$member->save();
+									$memberRankLog->save();
+
+								} catch( Exception $e )
+								{
+									echo "error: " . $e->getMessage() . "<br>";
+									//Response::redirect('readFile/index');
+								}
+
+
+							}else {
+								// 登録するメンバーを生成
+								$member = Model_Member::forge()->set(array(
+									'id'                => $member_id,
+									'club_id'           => (int) $club_id,
+									'gender'            => $sex_num,
+									'birthday'          => $row[3],
+									'post'              => $post_num,
+									'address1'          => $row[5],
+									'address2'          => $row[6],
+									'address3'          => $row[7],
+									'address4'          => $row[8],
+									'home_tell'         => $row[9],
+									'mobile_tell'       => $row[10],
+									'family_name_kana'  => $row[15],
+									'family_name_kanji' => $row[17],
+									'first_name_kana'   => $row[16],
+									'first_name_kanji'  => $row[18],
+									'age'               => $age,
+									'age_group'         => $age_group,
+								));
+
+								/*
+								// メンバーの2014年度として保存する
+								$memberRankLog = Model_MemberRankLog::forge()->set(array(
+									'member_id' => $member_id,
+									'rank_id'   => (int) $grade["menber_rank_id"],
+									'year'      => $file_year,
+									'pia_id'    => $row[1],
+								));*/
+
+
+								try
+								{
+									// DBに保存
+									//echo "保存に成功";
+									$member->save();
+									//$memberRankLog->save();
+
+								} catch( Exception $e )
+								{
+									echo "error: " . $e->getMessage() . "<br>";
+									//Response::redirect('readFile/index');
+								}
 							}
 						}
 					} catch( Exception $e )
