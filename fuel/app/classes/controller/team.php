@@ -98,12 +98,12 @@ class Controller_Team extends Controller_App
 				"club_id" => $select_team_id,
 			)
 		));
-		$data["profits"] = Format::forge($profits)->to_array();
+		// グラフ表示のために配列化
+		$profits = Format::forge($profits)->to_array();
 
 
-		$data["seats"] = Model_ClubMenberRank::find_by(array(
-			"club_id" => $select_team_id,
-		));
+		// 座席情報をを取得
+		$seats = Model_ClubMenberRank::find_by(array("club_id" => $select_team_id));
 
 		//var_dump($seats);
 
@@ -111,19 +111,18 @@ class Controller_Team extends Controller_App
 		// スタジアム画像の基本となるURL
 		$stadium_base_url = Model_ImgUrl::find_one_by("type", "stadium")["url"];
 
-
-		$data["bg_url"] = Uri::base(false). $club["bg_url"];  //TOPの背景画像のURL
-		$data["stadium_url"] = Uri::base(false). $stadium_base_url . $stadium["pic_file_name"];  //スタジアム画像のURL
-		$data["emblem_url"] = Uri::base(false) . "public/assets/img/club/" . $select_team_id . "/icon.png";  //エンブレム
-
-		$data["club"] = $club;
-		$data["club_detail"] = $detail;
-		$data["stadium"] = $stadium;
-
-		$data["league_name"] = $league["name"];
-
-
 		$this->template->title = "チーム詳細";
-		$this->template->content = View::forge('team/detail', $data);
+		$this->template->content = View::forge('team/detail');
+		$this->template->set_global(array(
+			"bg_url" => Uri::base(false). $club["bg_url"],
+			"stadium_url" => Uri::base(false). $stadium_base_url . $stadium["pic_file_name"],
+			"emblem_url" => Uri::base(false) . "public/assets/img/club/" . $select_team_id . "/icon.png",
+			"club" => $club,
+			"club_detail" => $detail,
+			"stadium" => $stadium,
+			"profits" => $profits,
+			"seats" => $seats,
+			"league_name" => $league["name"]
+		));
 	}
 }
