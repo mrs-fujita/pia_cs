@@ -15,7 +15,9 @@ class Model_Stadium extends \Orm\Model {
 		'post',
 		'seat_sum',
 		'longitude',
-		'latitude'
+		'latitude',
+		'pic_url',
+		'pic_file_name',
 	);
 
 	protected static $_has_many = array(

@@ -75,9 +75,9 @@
 										<td>
 											<div class="tableStadiumInfo">
 												<div class="tableStadiumInfo_details">
-													<div class="tableStadiumInfo_name">ヤマハスタジアム</div>
-													<div class="tableStadiumInfo_post">静岡県磐田市新貝2500</div>
-													<div class="tableStadiumInfo_seatSum">15,165人</div>
+													<div class="tableStadiumInfo_name"><?php echo $stadium["name"] ?></div>
+													<div class="tableStadiumInfo_post"><?php echo $stadium["address"] ?></div>
+													<div class="tableStadiumInfo_seatSum"><?php echo $stadium["seat_sum"] ?>人</div>
 												</div>
 												<div class="tableStadiumInfo_visual">
 													<img src="<?php echo $stadium_url ?>" alt="チームのスタジアム" class="tableStadiumInfo_img">

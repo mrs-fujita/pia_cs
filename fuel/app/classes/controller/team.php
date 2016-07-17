@@ -91,24 +91,21 @@ class Controller_Team extends Controller_App
 			$league = $club_detail->league;
 		}
 
-		//var_dump($club_details);
+		// スタジアム画像の基本となるURL
+		$stadium_base_url = Model_ImgUrl::find_one_by("type", "stadium")["url"];
 
 
-		//$data["league_name"] = $league["name"];
 		$data["bg_url"] = Uri::base(false). $club["bg_url"];  //TOPの背景画像のURL
-		$data["stadium_url"] = "/th_4/public/assets/img/stadium/jubilo.JPG";  //スタジアム画像のURL
+		$data["stadium_url"] = Uri::base(false). $stadium_base_url . $stadium["pic_file_name"];  //スタジアム画像のURL
 		$data["emblem_url"] = Uri::base(false) . "public/assets/img/club/" . $select_team_id . "/icon.png";  //エンブレム
 
 		$data["club"] = $club;
 		$data["club_detail"] = $detail;
 		$data["stadium"] = $stadium;
+
 		$data["league_name"] = $league["name"];
 
-		$data["club_name"] = $club["name"];
-
-
-
-
+		
 		$this->template->title = "チーム詳細";
 		$this->template->content = View::forge('team/detail', $data);
 	}
