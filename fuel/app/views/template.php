@@ -39,6 +39,9 @@
 
 	<!-- オリジナルCSS -->
 	<?php echo Asset::css('main.css'); ?>
+
+	<!-- jQuery -->
+	<?php echo Asset::js('lib/jquery.js'); ?>
 </head>
 
 <body>
@@ -72,7 +75,7 @@
 <!-- Main Content Ends -->
 
 <!-- js placed at the end of the document so the pages load faster -->
-<?php echo Asset::js('lib/jquery.js'); ?>
+<?php //echo Asset::js('lib/jquery.js'); jQueryは文章の途中でscriptタグを使いたいのでhead内で読み込む ?>
 <?php echo Asset::js('lib/bootstrap.min.js'); ?>
 <?php echo Asset::js('lib/pace.min.js'); ?>
 <?php echo Asset::js('lib/wow.min.js'); ?>

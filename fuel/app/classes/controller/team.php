@@ -81,7 +81,7 @@ class Controller_Team extends Controller_App
 			"limit" => 1
 		));
 
-		// チームの詳細情報からチームのスタジアム情報を取得
+		// チームの詳細情報からチームのスタジアム情報・リーグ情報を取得
 		$stadium = null;
 		$league = null;
 		$detail = null;
@@ -90,6 +90,18 @@ class Controller_Team extends Controller_App
 			$stadium = $club_detail->stadium;
 			$league = $club_detail->league;
 		}
+
+		$profits = Model_ClubDetail::find("all", array(
+			"select" => array("year", "operating_revenue", "operating_costs", "current_net_income"),
+			"where" => array(
+				"club_id" => $select_team_id,
+			)
+		));
+
+		$data["profits"] = Format::forge($profits)->to_array();
+
+		//var_dump($profits);
+
 
 		// スタジアム画像の基本となるURL
 		$stadium_base_url = Model_ImgUrl::find_one_by("type", "stadium")["url"];
@@ -105,7 +117,7 @@ class Controller_Team extends Controller_App
 
 		$data["league_name"] = $league["name"];
 
-		
+
 		$this->template->title = "チーム詳細";
 		$this->template->content = View::forge('team/detail', $data);
 	}
