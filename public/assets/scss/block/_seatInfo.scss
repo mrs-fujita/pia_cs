@@ -1,0 +1,25 @@
+/*
+#block - seatInfo
+
+チームの詳細表示する画面のシートの略称を説明する部分
+*/
+
+.seatInfo {
+  text-align: center;
+
+  .seatInfo_list {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    margin: 60px 0;
+  }
+  .seatInfo_item {
+    display: flex;
+    margin-bottom: 40px;
+
+    &:last-child { margin-bottom: 0;}
+  }
+
+  .seatInfo_abbreviation { width: 40px;}
+}
+

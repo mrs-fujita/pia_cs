@@ -712,6 +712,26 @@ aside.left-panel.collapsed .sideTeamInfo {
   .tableStadiumInfo .tableStadiumInfo_img {
     width: 200px; }
 
+/*
+#block - seatInfo
+
+チームの詳細表示する画面のシートの略称を説明する部分
+*/
+.seatInfo {
+  text-align: center; }
+  .seatInfo .seatInfo_list {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    margin: 60px 0; }
+  .seatInfo .seatInfo_item {
+    display: flex;
+    margin-bottom: 40px; }
+    .seatInfo .seatInfo_item:last-child {
+      margin-bottom: 0; }
+  .seatInfo .seatInfo_abbreviation {
+    width: 40px; }
+
 /* スマホサイズの時のみ
 @media (max-width: 767px) {}
 /* スマホ・タブレット共通(基本的にスマホに適用)

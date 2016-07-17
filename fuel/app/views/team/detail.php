@@ -6,7 +6,8 @@
 				<!-- meta -->
 				<div class="box-layout meta bottom">
 					<div class="col-sm-6 clearfix">
-						<span class="img-wrapper pull-left m-r-15"><img src="<?php echo $emblem_url ?>" alt="" style="width:64px" class="br-radius"></span>
+						<span class="img-wrapper pull-left m-r-15"><img src="<?php echo $emblem_url ?>" alt="" style="width:64px"
+						                                                class="br-radius"></span>
 						<div class="media-body">
 							<h3 class="text-white mb-2 m-t-10 ellipsis"><?php echo $club["name"] ?></h3>
 							<h5 class="text-white"> <?php echo $league_name ?></h5>
@@ -26,8 +27,8 @@
 					<ul class="nav nav-tabs profile-tabs">
 						<li class="active"><a data-toggle="tab" href="#aboutme">About</a></li>
 						<li class=""><a data-toggle="tab" href="#user-activities">Activities</a></li>
-						<li class=""><a data-toggle="tab" href="#edit-profile">Settings</a></li>
-						<li class=""><a data-toggle="tab" href="#projects">Projects</a></li>
+						<li class=""><a data-toggle="tab" href="#edit-profile">収益</a></li>
+						<li class=""><a data-toggle="tab" href="#projects">座席情報</a></li>
 					</ul>
 
 					<div class="tab-content m-0">
@@ -56,8 +57,8 @@
 									<tr>
 										<td><b>ホームタウン</b></td>
 										<td>
-												<?php echo $club_detail["home_town"]  ?>
-											</td>
+											<?php echo $club_detail["home_town"] ?>
+										</td>
 									</tr>
 									<tr>
 										<td><b>監督</b></td>
@@ -99,7 +100,8 @@
 								<div class="time-item">
 									<div class="item-info">
 										<div class="text-muted">5 minutes ago</div>
-										<p><strong><a href="#" class="text-info">John Doe</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+										<p><strong><a href="#" class="text-info">John Doe</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong>
+										</p>
 									</div>
 								</div>
 
@@ -107,15 +109,18 @@
 									<div class="item-info">
 										<div class="text-muted">30 minutes ago</div>
 										<p><a href="" class="text-info">Lorem</a> commented your post.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
+										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
+												euismod. "</em></p>
 									</div>
 								</div>
 
 								<div class="time-item">
 									<div class="item-info">
 										<div class="text-muted">59 minutes ago</div>
-										<p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John Doe</a>.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
+										<p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John
+												Doe</a>.</p>
+										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
+												euismod. "</em></p>
 									</div>
 								</div>
 
@@ -130,15 +135,18 @@
 									<div class="item-info">
 										<div class="text-muted">30 minutes ago</div>
 										<p><a href="" class="text-info">Lorem</a> commented your post.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
+										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
+												euismod. "</em></p>
 									</div>
 								</div>
 
 								<div class="time-item">
 									<div class="item-info">
 										<div class="text-muted">59 minutes ago</div>
-										<p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John Doe</a>.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
+										<p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John
+												Doe</a>.</p>
+										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
+												euismod. "</em></p>
 									</div>
 								</div>
 							</div>
@@ -146,8 +154,11 @@
 
 						<!-- 収益 -->
 						<div id="edit-profile" class="tab-pane">
-
-							<div class="profit_graph"></div>
+							<div class="row m-t-10">
+								<div class="col-md-12">
+									<div class="profit_graph"></div>
+								</div>
+							</div>
 
 							<script type="text/javascript">
 								var json = <?php echo json_encode($profits, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
@@ -230,10 +241,12 @@
 						</div>
 						<!-- end 収益 -->
 
-						<!-- profile -->
+						<!-- 座席情報 -->
 						<div id="projects" class="tab-pane">
 							<div class="row m-t-10">
-								<div class="col-md-12">
+
+								<!-- 座席テーブル -->
+								<div class="col-md-8">
 									<div class="portlet"><!-- /primary heading -->
 										<div id="portlet2" class="panel-collapse collapse in">
 											<div class="portlet-body">
@@ -241,56 +254,27 @@
 													<table class="table">
 														<thead>
 														<tr>
-															<th>#</th>
-															<th>Project Name</th>
-															<th>Start Date</th>
-															<th>Due Date</th>
-															<th>Status</th>
-															<th>Assign</th>
+															<th>座席名</th>
+															<th>金額</th>
+															<th>グレード</th>
 														</tr>
 														</thead>
 														<tbody>
-														<tr>
-															<td>1</td>
-															<td>Velonic Admin</td>
-															<td>01/01/2015</td>
-															<td>07/05/2015</td>
-															<td><span class="label label-info">Work in Progress</span></td>
-															<td>Coderthemes</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Velonic Frontend</td>
-															<td>01/01/2015</td>
-															<td>07/05/2015</td>
-															<td><span class="label label-success">Pending</span></td>
-															<td>Coderthemes</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Velonic Admin</td>
-															<td>01/01/2015</td>
-															<td>07/05/2015</td>
-															<td><span class="label label-pink">Done</span></td>
-															<td>Coderthemes</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>Velonic Frontend</td>
-															<td>01/01/2015</td>
-															<td>07/05/2015</td>
-															<td><span class="label label-purple">Work in Progress</span></td>
-															<td>Coderthemes</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Velonic Admin</td>
-															<td>01/01/2015</td>
-															<td>07/05/2015</td>
-															<td><span class="label label-warning">Coming soon</span></td>
-															<td>Coderthemes</td>
-														</tr>
-
+														<?php foreach($seats as $seat) : ?>
+															<tr>
+																<td><?php echo $seat["grade_name"] ?></td>
+																<td><?php echo $seat["price"] ?>円</td>
+																<td>
+																	<?php if($seat["menber_rank_id"] == 1) : ?>
+																		<span class="badge bg-info">SS</span>
+																	<?php elseif($seat["menber_rank_id"] == 2) : ?>
+																		<span class="badge bg-warning">FC</span>
+																	<?php elseif($seat["menber_rank_id"] == 3) : ?>
+																		<span class="badge bg-pink">無料</span>
+																	<?php endif; ?>
+																</td>
+															</tr>
+														<?php endforeach; ?>
 														</tbody>
 													</table>
 												</div>
@@ -298,6 +282,32 @@
 										</div>
 									</div> <!-- /Portlet -->
 								</div>
+								<!-- end 座席テーブル -->
+
+								<!-- 座席種類説明 -->
+								<div class="col-md-4">
+									<div class="portlet">
+										<div class="seatInfo">
+											<ul class="seatInfo_list">
+												<li class="seatInfo_item">
+													<div class="seatInfo_abbreviation"><span class="badge bg-info">SS</span></div>
+													<div class="seatInfo_description">・・シーズンシート</div>
+												</li>
+												<li class="seatInfo_item">
+													<div class="seatInfo_abbreviation"><span class="badge bg-warning">FC</span></div>
+													<div class="seatInfo_description">・・ファン会員</div>
+												</li>
+												<li class="seatInfo_item">
+													<div class="seatInfo_abbreviation"><span class="badge bg-pink">無料</span></div>
+													<div class="seatInfo_description">・・無料会員</div>
+												</li>
+											</ul>
+
+										</div>
+									</div>
+								</div>
+								<!-- end 座席種類説明 -->
+
 							</div>
 						</div>
 					</div>
@@ -306,10 +316,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
 
 
 </div>

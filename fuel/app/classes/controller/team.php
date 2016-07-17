@@ -91,16 +91,21 @@ class Controller_Team extends Controller_App
 			$league = $club_detail->league;
 		}
 
+		// チームの収益情報を取得
 		$profits = Model_ClubDetail::find("all", array(
 			"select" => array("year", "operating_revenue", "operating_costs", "current_net_income"),
 			"where" => array(
 				"club_id" => $select_team_id,
 			)
 		));
-
 		$data["profits"] = Format::forge($profits)->to_array();
 
-		//var_dump($profits);
+
+		$data["seats"] = Model_ClubMenberRank::find_by(array(
+			"club_id" => $select_team_id,
+		));
+
+		//var_dump($seats);
 
 
 		// スタジアム画像の基本となるURL
