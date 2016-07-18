@@ -51,6 +51,50 @@ class InsertAudience
 		echo "書き込み終了";
 	}
 
+
+	public function collect()
+	{
+		$end_flg = false;
+
+		while( !$end_flg )
+		{
+			$index = 1;
+			// CSVから読み込んだ仮の状態の観戦情報を取得
+			$watch_infos = \Model_WatchingInfoProvisional::find_by(array(
+				'rewriting_flg' => 0,
+			), null, null, 10);
+
+			// 仮の観戦情報の処理が全て終わっていなければ処理を行う
+			if(count($watch_infos) == 0)
+			{
+				// 全ての処理が終わっている時
+				$end_flg = true;
+				echo "全件の処理が終わっているので、処理を終了します";
+
+			}else {
+				// 仮の状態から処理を行う
+				$this->run();
+				echo $index . "件目 処理完了\n";
+
+				$index++;
+			}
+		}
+
+
+/*
+		// CSVから読み込んだ仮の状態の観戦情報を取得
+		$watch_infos = \Model_WatchingInfoProvisional::find_by(array(
+			'rewriting_flg' => 0,
+		), null, null, 10);
+
+		if(count($watch_infos) == 0)
+		{
+
+		}
+*/
+	}
+
+
 	public function reset()
 	{
 		// 観戦情報テーブルを全て削除
