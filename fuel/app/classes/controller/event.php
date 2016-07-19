@@ -127,9 +127,7 @@ class Controller_Event extends Controller_App
 				$this->template->content = View::forge('event/index', $data);
 			}
     }
-		//var_dump($entry);
 		$data["details"] = Model_Event::find_by('id',$id);
-    //return Response::forge(View::forge('event/detail',$data));
 		$this->template->title = "イベント一覧";
 		$this->template->content = View::forge('event/index', $data);
 	}
@@ -152,7 +150,6 @@ class Controller_Event extends Controller_App
 			}
 		}
 		$data["events"] = Model_Event::find_all();
-		//return Response::forge(View::forge('event/index',$data));
 		$this->template->title = "イベント一覧";
 		$this->template->content = View::forge('event/index', $data);
   }

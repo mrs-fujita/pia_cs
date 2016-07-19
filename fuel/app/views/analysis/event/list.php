@@ -43,30 +43,18 @@
 		</thead>
 		<tbody>
 		<?php foreach ((array)$events as $event): ?>
-			<tr>
-				<th scope="row"><?php echo $event["id"] ?></th>
-				<td><?php echo $event["name"] ?></td>
-				<td><?php echo $event["venue"] ?></td>
-				<td><?php echo $event["dating"] ?></td>
-				<td><?php echo $event["content"] ?></td>
-				<td><?php echo $event["visitors_num"] ?></td>
-				<td>
-					<?php
-							echo Form::open(array('action' => 'event/detail', 'method' => 'get'));
-							echo Form::hidden("id",$event["id"]);
-							echo Form::submit("","詳細");
-							echo Form::close();
-					?>
-				</td>
-				<td>
-					<?php
-							echo Form::open('event/delete');
-							echo Form::hidden("id",$event["id"]);
-							echo Form::submit("","削除");
-							echo Form::close();
-					?>
-				</td>
-			</tr>
+			<form name="form">
+				<tr>
+					<th scope="row"><?php echo $event["id"] ?></th>
+					<td><?php echo $event["name"] ?></td>
+					<td><?php echo $event["venue"] ?></td>
+					<td><?php echo $event["dating"] ?></td>
+					<td><?php echo $event["content"] ?></td>
+					<td><?php echo $event["visitors_num"] ?></td>
+					<input type="hidden" name="dating" value="<?php echo $event["dating"] ?>">
+					<td><input type="submit" name="btn" value="表示"></td>
+				</tr>
+			</form>
 		<?php endforeach; ?>
 		</tbody>
 	</table>

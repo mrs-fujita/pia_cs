@@ -3,16 +3,19 @@ $(function() {
   var audience = "audience";
   var winPercent = "winingPercents";
   var event_day = "event_day";
+  var visitors_num = "visitors_num";
   var dating = "dating";
 
   var audiences = [];
   var winPercents = [];
   var event_days = [];
+  var visitors_nums = [];
   var datings = [];
 
   audiences.push(audience);
   winPercents.push(winPercent);
   event_days.push(event_day);
+  visitors_nums.push(visitors_num);
   datings.push(dating);
 
   $.each(json0, function(key, value) {
@@ -30,8 +33,10 @@ $(function() {
   $.each(json1, function(key, value) {
 
     console.log(key + "v: " + value);
+    console.log(this.visitors_num);
     console.log(this.dating);
 
+    visitors_nums.push(this.visitors_num);
     datings.push(this.dating);
   });
 
@@ -45,19 +50,18 @@ $(function() {
       columns: [
         audiences,
         winPercents,
+        visitors_nums,
         event_days
         // venues,
         // datings
       ],
       axes: {
-        audiences: 'y',
-        winingPercents: 'y2',
-        s: 'y3',
-        event_days:'x'
+         winingPercents: 'y2'
       },
       types: {
         audience: 'bar',
-        winPercents: 'line',
+        visitors_num: 'bar',
+        //winPercents: 'bar',
         //data3: 'spline',
         //data4: 'line',
         //data5: 'bar'
@@ -65,8 +69,8 @@ $(function() {
       colors: {
         audience: '#ebc142',
         winPercents: '#03a9f4',
-        venues: '#009688',
-        datings: '#E67A77'
+        visitors_num: '#009688',
+        // datings: '#E67A77'
         //data5: '#95D7BB'
       },
     groups: [
@@ -79,6 +83,10 @@ $(function() {
         tick: {
             format: "%m/%e"
         }
+      },
+      y: {
+        max: 24000,
+        min: 5000,
       },
       y2: {
         max: 90,

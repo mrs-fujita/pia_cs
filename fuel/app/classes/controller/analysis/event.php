@@ -33,7 +33,14 @@ class Controller_Analysis_Event extends Controller_App
 		//$club_id = Input::post('id');
 
 		$data["events"] = Model_Event::find_all();
-		$array1 = Format::forge($data["events"])->to_array();
+
+		// $data["events_2014"] = Model_Event::find(array(
+		// 	"select" => array("visitors_num", "dating"),
+		// 	"where" => array(
+		// 		array('dating', 'like', '%2014%'),
+		// 	),
+		// 	"order_by" => array('dating' => 'asc',),
+		// ));
 
 		$data["competitions_2014"] = Model_ViewCompetitionDetail::find(array(
 			"select" => array("audience_sum", "event_day", "winning_percentage"),
@@ -43,11 +50,11 @@ class Controller_Analysis_Event extends Controller_App
 			),
 			"order_by" => array('event_day' => 'asc',),
 		));
-		$array2 = Format::forge($data["competitions_2014"])->to_array();
+
+		$data["events"] = Format::forge($data["events"])->to_array();
 
 		$data["competitions_2014"] = Format::forge($data["competitions_2014"])->to_array();
 
-		$data["sample_array"] = $data["events"] + $data["competitions_2014"];
 		$this->template->title = "イベント棒グラフ";
 		$this->template->content = View::forge('analysis/event/list', $data);
 
