@@ -18,9 +18,11 @@
 								<thead>
 								<tr>
 									<th>イベントid</th>
+									<th>イベント名</th>
 									<th>開催場所名</th>
 									<th>開催日</th>
 									<th>開催内容</th>
+									<th>総来客数</th>
 								</tr>
 								</thead>
 
@@ -28,9 +30,11 @@
 								<?php foreach ((array)$events as $event): ?>
 									<tr>
 										<th scope="row"><?php echo $event["id"] ?></th>
+										<td><?php echo $event["name"] ?></td>
 										<td><?php echo $event["venue"] ?></td>
 										<td><?php echo $event["dating"] ?></td>
 										<td><?php echo $event["content"] ?></td>
+										<td><?php echo $event["visitors_num"] ?></td>
 										<td>
 											<?php
 													echo Form::open(array('action' => 'event/detail', 'method' => 'get'));
