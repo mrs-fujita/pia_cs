@@ -32,7 +32,7 @@ class Controller_Analysis_Weather extends Controller_App
 				$good_word .= $good_weather["name"];
 			else $good_word .= $good_weather["name"] . ", ";
 		}
-		$data["good_word"] = $good_word;
+		//$data["good_word"] = $good_word;
 
 		// 悪い天気と判別している天気のみ取得
 		$bad_word = "";
@@ -42,14 +42,14 @@ class Controller_Analysis_Weather extends Controller_App
 				$bad_word .= $bad_weather["name"];
 			else $bad_word .= $bad_weather["name"] . ", ";
 		}
-		$data["bad_word"] = $bad_word;
+		//$data["bad_word"] = $bad_word;
 
 		//echo $good . "<br>";
 		//echo $bad . "<br><br>";
 
 
 		$good_competitons = Model_ViewCompetitionDetail::find(array(
-			"select" => array("audience_sum", "event_day", "section"),
+			"select" => array("audience_sum", "event_day", "section", "competition_id"),
 			"where" => array(
 				"club_id_a" => $select_team_id,
 
@@ -58,9 +58,16 @@ class Controller_Analysis_Weather extends Controller_App
 				"weather_type" => 1,
 			)
 		));
-		$data["good_competitons"] = Format::forge($good_competitons)->to_array();
+		$good_weather_ids = array();
+		foreach($good_competitons as $good_competiton)
+			$good_weather_ids[] = $good_competiton["competition_id"];
+
+		//var_dump($good_weather_ids);
+
+		//echo "<br><br>";
+
 		$bad_competitons = Model_ViewCompetitionDetail::find(array(
-			"select" => array("audience_sum", "event_day", "section"),
+			"select" => array("audience_sum", "event_day", "section", "competition_id"),
 			"where" => array(
 				"club_id_a" => $select_team_id,
 
@@ -69,21 +76,50 @@ class Controller_Analysis_Weather extends Controller_App
 				"weather_type" => 0,
 			)
 		));
-		$data["bad_competitons"] = Format::forge($bad_competitons)->to_array();
+		$bad_weather_ids = array();
+		foreach($bad_competitons as $bad_competiton)
+			$bad_weather_ids[] = $bad_competiton["competition_id"];
 
-		//var_dump($good_competitons);
 
-		//var_dump($good_weathers);
+
+		$good_weather_members = Model_ViewAudienceDetail::find("all", array(
+			"select" => array(
+				DB::expr("COUNT(*)"),
+				"age_group"
+				),
+			"where" => array(
+				//"age_group" => 3,
+				array("age_group", "is", DB::expr("not null")),
+				array("competition_id", "IN", $good_weather_ids),
+			),
+			"group_by" => array("age_group")
+		));
+		//var_dump($good_weather_members);
+
+		$bad_weather_members = Model_ViewAudienceDetail::find("all", array(
+			"select" => array(
+				DB::expr("COUNT(*)"),
+				"age_group"
+			),
+			"where" => array(
+				//"age_group" => 3,
+				array("age_group", "is", DB::expr("not null")),
+				array("competition_id", "IN", $bad_weather_ids),
+			),
+			"group_by" => array("age_group")
+		));
+
 
 		$this->template->title = "天候結果画面";
-		$this->template->content = View::forge('analysis/weather/result', $data);
+		$this->template->content = View::forge('analysis/weather/result');
 		$this->template->set_global(array(
 			"good_word" => $good_word,
 			"bad_word" => $bad_word,
-			"good_competitons" => $good_competitons,
-			"bad_competitons" => $bad_competitons,
+			"good_competitons" => Format::forge($good_competitons)->to_array(),
+			"bad_competitons" => Format::forge($bad_competitons)->to_array(),
+			"good_weather_members" => Format::forge($good_weather_members)->to_array(),
+			"bad_weather_members" => Format::forge($bad_weather_members)->to_array(),
 		));
-
 	}
 
 	public function action_compare()
