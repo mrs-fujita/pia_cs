@@ -1,0 +1,17 @@
+/*
+#Block - weatherType
+
+天候結果画面のいい天気・悪い天気を一覧表示しタイプを変更するボタン
+*/
+
+.weatherType {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #000000;
+
+  .weatherType_list { list-style: none; padding: 0; }
+  .weatherType_item { color: #FFF; }
+
+  //.weatherType_changeBtn { background-color: #fff;}
+}
