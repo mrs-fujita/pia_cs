@@ -48,7 +48,15 @@
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('analysis/user/list', 'ユーザ一覧'); ?></li>
 				<li><?php echo Html::anchor('analysis/user/age', 'ユーザ年齢別グラフ'); ?></li>
-				<li><a href="portlets.html">ユーザ位置相関</a></li>
+			</ul>
+		</li>
+		<li class="has-submenu">
+			<a href="#">
+				<i class="ion-settings"></i> <span class="nav-label">天候</span>
+			</a>
+			<ul class="list-unstyled">
+				<li><?php echo Html::anchor('analysis/weather/result', '天候別結果'); ?></li>
+				<li><?php echo Html::anchor('analysis/weather/compare', '天候比較'); ?></li>
 			</ul>
 		</li>
 		<li class="has-submenu">

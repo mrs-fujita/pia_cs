@@ -23,7 +23,6 @@
 
 	<!-- modal -->
 	<?php echo Asset::css('lib/assets/modal-effect/component.css'); ?>
-	<link href="assets/modal-effect/css/component.css" rel="stylesheet">
 
 
 	<!-- Custom styles for this template -->
@@ -118,15 +117,13 @@
 <?php if(strpos(Uri::current(), 'winPerGraph') !== false): ?>
 	<?php echo Asset::js('lib/assets/c3-chart/winPerGraph.js'); ?>
 <?php else: ?>
-	<?php echo Asset::js('lib/assets/c3-chart/userAge.js'); ?>
+	<?php // echo Asset::js('lib/assets/c3-chart/userAge.js'); ?>
 <?php endif; ?>
 <?php // echo Asset::js('lib/assets/c3-chart/c3-chart.init.js'); ?>
 
 <!-- Modal-Effect -->
 <?php echo Asset::js('lib/assets/modal-effect/classie.js'); ?>
 <?php echo Asset::js('lib/assets/modal-effect/modalEffects.js'); ?>
-<!--<script src="assets/modal-effect/js/classie.js"></script>-->
-<!--<script src="assets/modal-effect/js/modalEffects.js"></script>-->
 
 
 </body>
