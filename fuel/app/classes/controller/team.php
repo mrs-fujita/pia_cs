@@ -31,7 +31,8 @@ class Controller_Team extends Controller_App
 	{
 		$post = Input::post();
 		$data[] = Model_Team::find($post["id"]);
-		return Response::forge(View::forge('Team/Detail',$data));
+
+		return Response::forge(View::forge('Team/Detail', $data));
 	}
 
 	/**
@@ -62,6 +63,7 @@ class Controller_Team extends Controller_App
 		return Response::forge(View::forge('team/select'));
 	}
 
+
 	public function action_detail()
 	{
 		//$this->template = View::forge('template_test');
@@ -74,27 +76,48 @@ class Controller_Team extends Controller_App
 
 		// チームの最後に登録されている詳細情報を取得
 		$club_details = Model_ClubDetail::find("all", array(
-			"where" => array(
+			"where"    => array(
 				"club_id" => $select_team_id,
 			),
-			"order_by" => array("year" => "desc"),
-			"limit" => 1
+			"order_by" => array( "year" => "desc" ),
+			"limit"    => 1
 		));
 
 		// チームの詳細情報からチームのスタジアム情報・リーグ情報を取得
 		$stadium = null;
 		$league = null;
 		$detail = null;
-		foreach($club_details as $club_detail) {
+		foreach($club_details as $club_detail)
+		{
 			$detail = $club_detail;
 			$stadium = $club_detail->stadium;
 			$league = $club_detail->league;
 		}
 
+
+		$club_histories = Model_clubHistory::find("all", array(
+			"where" => array("club_id" => $select_team_id),
+			//"group_by" => array("year")
+		));
+
+		/*
+		foreach($club_histories as $club_history)
+		{
+			echo $club_history["year"] . ": ";
+			echo $club_history["item"];
+
+			var_dump(next($club_histories));
+
+			//var_dump(count($club_history));
+			echo "<br><br><br>";
+		}*/
+
+		//var_dump($club_histories);
+
 		// チームの収益情報を取得
 		$profits = Model_ClubDetail::find("all", array(
-			"select" => array("year", "operating_revenue", "operating_costs", "current_net_income"),
-			"where" => array(
+			"select" => array( "year", "operating_revenue", "operating_costs", "current_net_income" ),
+			"where"  => array(
 				"club_id" => $select_team_id,
 			)
 		));
@@ -103,13 +126,14 @@ class Controller_Team extends Controller_App
 
 
 		// 座席情報をを取得
-		$seats = Model_ClubMenberRank::find_by(array("club_id" => $select_team_id));
+		$seats = Model_ClubMenberRank::find_by(array( "club_id" => $select_team_id ));
 
 		//var_dump($seats);
 
 
 		// スタジアム画像の基本となるURL
 		$stadium_base_url = Model_ImgUrl::find_one_by("type", "stadium")["url"];
+
 
 		$this->template->title = "チーム詳細";
 		$this->template->content = View::forge('team/detail');
@@ -122,7 +146,9 @@ class Controller_Team extends Controller_App
 			"stadium" => $stadium,
 			"profits" => $profits,
 			"seats" => $seats,
-			"league_name" => $league["name"]
+			"league_name" => $league["name"],
+			"club_histories" => $club_histories
 		));
+
 	}
 }

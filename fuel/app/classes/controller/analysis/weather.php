@@ -32,7 +32,6 @@ class Controller_Analysis_Weather extends Controller_App
 				$good_word .= $good_weather["name"];
 			else $good_word .= $good_weather["name"] . ", ";
 		}
-		//$data["good_word"] = $good_word;
 
 		// 悪い天気と判別している天気のみ取得
 		$bad_word = "";
@@ -42,12 +41,9 @@ class Controller_Analysis_Weather extends Controller_App
 				$bad_word .= $bad_weather["name"];
 			else $bad_word .= $bad_weather["name"] . ", ";
 		}
-		//$data["bad_word"] = $bad_word;
-
-		//echo $good . "<br>";
-		//echo $bad . "<br><br>";
 
 
+		// いい天気の時の試合情報を取得
 		$good_competitons = Model_ViewCompetitionDetail::find(array(
 			"select" => array("audience_sum", "event_day", "section", "competition_id"),
 			"where" => array(
@@ -58,14 +54,14 @@ class Controller_Analysis_Weather extends Controller_App
 				"weather_type" => 1,
 			)
 		));
+
+		// いい天気の時の試合のidのみの配列を作成
 		$good_weather_ids = array();
 		foreach($good_competitons as $good_competiton)
 			$good_weather_ids[] = $good_competiton["competition_id"];
 
-		//var_dump($good_weather_ids);
 
-		//echo "<br><br>";
-
+		// 悪い天気の時の試合情報を取得
 		$bad_competitons = Model_ViewCompetitionDetail::find(array(
 			"select" => array("audience_sum", "event_day", "section", "competition_id"),
 			"where" => array(
@@ -76,13 +72,16 @@ class Controller_Analysis_Weather extends Controller_App
 				"weather_type" => 0,
 			)
 		));
+
+		// 悪い天気の時の試合のidのみの配列を作成
 		$bad_weather_ids = array();
 		foreach($bad_competitons as $bad_competiton)
 			$bad_weather_ids[] = $bad_competiton["competition_id"];
 
 
 
-		$good_weather_members = Model_ViewAudienceDetail::find("all", array(
+		// いい天気の時の年齢分布を取得
+		$good_weather_member_ages = Model_ViewAudienceDetail::find("all", array(
 			"select" => array(
 				DB::expr("COUNT(*)"),
 				"age_group"
@@ -96,7 +95,8 @@ class Controller_Analysis_Weather extends Controller_App
 		));
 		//var_dump($good_weather_members);
 
-		$bad_weather_members = Model_ViewAudienceDetail::find("all", array(
+		// 悪い天気の時の年齢分布を取得
+		$bad_weather_member_ages = Model_ViewAudienceDetail::find("all", array(
 			"select" => array(
 				DB::expr("COUNT(*)"),
 				"age_group"
@@ -112,13 +112,14 @@ class Controller_Analysis_Weather extends Controller_App
 
 		$this->template->title = "天候結果画面";
 		$this->template->content = View::forge('analysis/weather/result');
+		// VIEW側でincludeを使っても大丈夫なように大域変数に値を設定
 		$this->template->set_global(array(
 			"good_word" => $good_word,
 			"bad_word" => $bad_word,
 			"good_competitons" => Format::forge($good_competitons)->to_array(),
 			"bad_competitons" => Format::forge($bad_competitons)->to_array(),
-			"good_weather_members" => Format::forge($good_weather_members)->to_array(),
-			"bad_weather_members" => Format::forge($bad_weather_members)->to_array(),
+			"good_weather_member_ages" => Format::forge($good_weather_member_ages)->to_array(),
+			"bad_weather_member_ages" => Format::forge($bad_weather_member_ages)->to_array(),
 		));
 	}
 

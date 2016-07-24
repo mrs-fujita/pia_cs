@@ -26,7 +26,7 @@
 				<div class="panel-body p-0">
 					<ul class="nav nav-tabs profile-tabs">
 						<li class="active"><a data-toggle="tab" href="#aboutme">About</a></li>
-						<li class=""><a data-toggle="tab" href="#user-activities">Activities</a></li>
+						<li class=""><a data-toggle="tab" href="#user-activities">歴史</a></li>
 						<li class=""><a data-toggle="tab" href="#edit-profile">収益</a></li>
 						<li class=""><a data-toggle="tab" href="#projects">座席情報</a></li>
 					</ul>
@@ -43,6 +43,34 @@
 						<!-- Activities -->
 						<div id="user-activities" class="tab-pane">
 							<div class="timeline-2">
+
+
+								<?php $year = 0;
+								$first_flg = true; ?>
+
+
+								<?php foreach($club_histories as $club_history) : ?>
+
+									<?php if($year != $club_history["year"]) : ?>
+										<div class="time-item">
+										<div class="item-info">
+										<div class="text-muted"><?php echo $club_history["year"] ?></div>
+										<p><?php echo $club_history["item"] ?></p>
+									<?php else: ?>
+										<p><?php echo $club_history["item"] ?></p>
+									<?php endif; ?>
+
+									<?php if($club_history["last_flg"] == 1): ?>
+										</div>
+										</div>
+									<?php endif; ?>
+
+									<?php $year = $club_history["year"] ?>
+
+								<?php endforeach; ?>
+
+
+								<!--
 								<div class="time-item">
 									<div class="item-info">
 										<div class="text-muted">5 minutes ago</div>
@@ -57,6 +85,8 @@
 										<p><a href="" class="text-info">Lorem</a> commented your post.</p>
 										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
 												euismod. "</em></p>
+										<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
+											euismod. "</p>
 									</div>
 								</div>
 
@@ -75,26 +105,9 @@
 										<div class="text-muted">5 minutes ago</div>
 										<p><strong><a href="#" class="text-info">John Doe</a></strong>Uploaded 2 new photos</p>
 									</div>
-								</div>
+								</div>-->
 
-								<div class="time-item">
-									<div class="item-info">
-										<div class="text-muted">30 minutes ago</div>
-										<p><a href="" class="text-info">Lorem</a> commented your post.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
-												euismod. "</em></p>
-									</div>
-								</div>
 
-								<div class="time-item">
-									<div class="item-info">
-										<div class="text-muted">59 minutes ago</div>
-										<p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John
-												Doe</a>.</p>
-										<p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt
-												euismod. "</em></p>
-									</div>
-								</div>
 							</div>
 						</div>
 
