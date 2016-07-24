@@ -39,6 +39,7 @@ class Controller_User extends Controller
 			Session::delete('userid');
 			Session::delete('user_name');
 			Session::delete('select_team_id');
+			Session::delete('owner_flg');
 
 			Response::redirect('user/login');
 		}
@@ -70,6 +71,9 @@ class Controller_User extends Controller
 			Session::set('userid', $ret["id"]);
 			$admin = Model_Admin::find_one_by("id", $ret["id"]);
 			Session::set('user_name', $admin["name"]);
+
+			if($admin["authority_id"] == 1) Session::set("owner_flg", true);
+			else Session::set("owner_flg", false);
 
 			Response::redirect('team/select');
 		}

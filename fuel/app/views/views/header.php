@@ -7,20 +7,6 @@
 
 <!-- Left navbar -->
 <nav class=" navbar-default" role="navigation">
-	<!--
-	<ul class="nav navbar-nav hidden-xs">
-		<li class="dropdown">
-			<a data-toggle="dropdown" class="dropdown-toggle" href="#">English <span class="caret"></span></a>
-			<ul role="menu" class="dropdown-menu">
-				<li><a href="#">German</a></li>
-				<li><a href="#">French</a></li>
-				<li><a href="#">Italian</a></li>
-				<li><a href="#">Spanish</a></li>
-			</ul>
-		</li>
-		<li><a href="#">Files</a></li>
-	</ul>
-	-->
 
 	<!-- Right navbar -->
 	<ul class="nav navbar-nav navbar-right top-menu top-right-menu">
@@ -105,7 +91,11 @@
 			</a>
 			<ul class="dropdown-menu pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
 				<!--<li><a href="profile.html"><i class="fa fa-briefcase"></i>Profile</a></li>-->
-				<li><a href="#"><i class="fa fa-cog"></i>ユーザ設定</a></li>
+
+				<?php if(Session::get("owner_flg")) : ?>
+					<li><a href="<?php echo Uri::base(false) ?>admin/index"><i class="fa fa-cog"></i>管理者画面</a></li>
+				<?php endif; ?>
+				<li><a href="<?php echo Uri::base(false) ?>team/select"><i class="fa fa-sign-out"></i>チーム選択画面に戻る</a></li>
 				<li><a href="<?php echo Uri::base(false) ?>user/logout"><i class="fa fa-sign-out"></i>ログアウト</a></li>
 			</ul>
 		</li>

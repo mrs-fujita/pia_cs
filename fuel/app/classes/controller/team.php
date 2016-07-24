@@ -1,24 +1,5 @@
 <?php
-/**
- * Fuel is a fast, lightweight, community driven PHP5 framework.
- *
- * @package    Fuel
- * @version    1.8
- * @author     Mrs_fujita
- * @license    MIT License
- * @copyright  2010 - 2016 Fuel Development Team
- * @link       http://fuelphp.com
- */
 
-/**
- * The Teams Controller.
- *
- *The team methods
- *prease write on this php
- *
- * @package  app
- * @extends  Controller
- */
 class Controller_Team extends Controller_App
 {
 	/**

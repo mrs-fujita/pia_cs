@@ -106,8 +106,6 @@
 										<p><strong><a href="#" class="text-info">John Doe</a></strong>Uploaded 2 new photos</p>
 									</div>
 								</div>-->
-
-
 							</div>
 						</div>
 

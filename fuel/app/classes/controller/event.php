@@ -1,21 +1,5 @@
 <?php
-/**
- * Fuel is a fast, lightweight, community driven PHP5 framework.
- *
- * @package    Fuel
- * @version    1.8
- * @author     Mrs_fujita
- * @license    MIT License
- * @copyright  2010 - 2016 Fuel Development Team
- * @link       http://fuelphp.com
- */
 
-/**
- * The event Controller.
- *
- * @package  app
- * @extends  Controller
- */
 class Controller_Event extends Controller_App
 {
 	/**
@@ -26,6 +10,8 @@ class Controller_Event extends Controller_App
 	 */
 	public function action_index()
 	{
+		$this->template = View::forge('template-admin');
+
 		$data["events"] = Model_Event::find_all();
 		//return Response::forge(View::forge('event/index',$data));
 		$this->template->title = "イベント一覧";
@@ -40,6 +26,8 @@ class Controller_Event extends Controller_App
 	 */
 	public function action_detail()
 	{
+		$this->template = View::forge('template-admin');
+
     $get = Input::get();
 		$id = $get["id"];
 		$data["details"] = Model_Event::find_by('id',$id);
@@ -56,6 +44,8 @@ class Controller_Event extends Controller_App
 	 */
 	public function action_add()
 	{
+		$this->template = View::forge('template-admin');
+
 		//return Response::forge(View::forge('event/add'));
 		$data["category"] = Model_Category::find_all();
 		$this->template->title = "イベント追加";
@@ -70,6 +60,8 @@ class Controller_Event extends Controller_App
 	 */
 	public function action_adddo()
 	{
+		$this->template = View::forge('template-admin');
+
     $post = Input::post();
 		$update = Model_Event::post_add($post);
 		if(!$update){
@@ -92,6 +84,8 @@ class Controller_Event extends Controller_App
    */
   public function action_update()
   {
+	  $this->template = View::forge('template-admin');
+
 		$get = Input::get();
 		$id = $get["id"];
 		$data["update"] = Model_Event::find_by('id',$id);
@@ -108,6 +102,8 @@ class Controller_Event extends Controller_App
    */
   public function action_updatedo()
   {
+	  $this->template = View::forge('template-admin');
+
     $post = Input::post();
 		$id = $post["id"];
     $entry = Model_Event::find_by_pk($post["id"]);
@@ -140,6 +136,8 @@ class Controller_Event extends Controller_App
    */
   public function action_delete()
   {
+	  $this->template = View::forge('template-admin');
+
     $post = Input::post();
     $entry = Model_Event::find_by_pk($post["id"]);
 		if ($entry){

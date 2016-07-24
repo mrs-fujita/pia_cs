@@ -5,6 +5,8 @@ class Controller_Admin extends Controller_App
 
 	public function action_index()
 	{
+		$this->template = View::forge('template-admin');
+
 		// 全てのユーザを取得
 		$data["admins"] = Model_Admin::find_all();
 
@@ -18,6 +20,8 @@ class Controller_Admin extends Controller_App
 
 	public function action_detail()
 	{
+		$this->template = View::forge('template-admin');
+
 		// postでadminのidを受け取る
 		$post = Input::post();
 		// postのデータがあるかの判定
@@ -39,6 +43,8 @@ class Controller_Admin extends Controller_App
 
 	public function action_create()
 	{
+		$this->template = View::forge('template-admin');
+
 		// テンプレートを使用して管理者の詳細を表示
 		$this->template->title = "管理者追加";
 		$this->template->content = View::forge('admin/create');
