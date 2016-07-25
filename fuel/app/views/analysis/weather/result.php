@@ -38,4 +38,48 @@
 
 	</div>  <!-- End row -->
 
+	<div class="row">
+		<div class="col-lg-6 col-md-6">
+			<div class="portlet"><!-- /primary heading -->
+				<div class="portlet-heading">
+					<h3 class="portlet-title text-dark">天候がいい時の年齢層</h3>
+					<div class="portlet-widgets">
+						<a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+						<span class="divider"></span>
+						<a data-toggle="collapse" data-parent="#accordion1" href="#portlet3"><i class="ion-minus-round"></i></a>
+						<span class="divider"></span>
+						<a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div id="portlet3" class="panel-collapse collapse in">
+					<div class="portlet-body">
+						<?php echo View::forge('analysis/weather/include/goodAgeChart.inc') ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-md-6">
+			<div class="portlet"><!-- /primary heading -->
+				<div class="portlet-heading">
+					<h3 class="portlet-title text-dark">天候が悪い時の年齢層</h3>
+					<div class="portlet-widgets">
+						<a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+						<span class="divider"></span>
+						<a data-toggle="collapse" data-parent="#accordion1" href="#portlet3"><i class="ion-minus-round"></i></a>
+						<span class="divider"></span>
+						<a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div id="portlet3" class="panel-collapse collapse in">
+					<div class="portlet-body">
+						<?php echo View::forge('analysis/weather/include/badAgeChart.inc') ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

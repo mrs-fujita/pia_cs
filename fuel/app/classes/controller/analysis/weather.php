@@ -10,7 +10,6 @@ class Controller_Analysis_Weather extends Controller_App
 	 * それらを選択後、更に細かく選択出来るようにする（2014年・2014/1・1節..など）
 	 *
 	 */
-
 	public function action_result()
 	{
 
@@ -79,35 +78,12 @@ class Controller_Analysis_Weather extends Controller_App
 			$bad_weather_ids[] = $bad_competiton["competition_id"];
 
 
+		// 天気がいい時のメンバーの年齢層を取得
+		$good_weather_member_ages = Model_ViewAudienceDetail::get_group_age_from_comptition_ids($good_weather_ids);
+		// 天気が悪い時のメンバーの年齢層を取得
+		$bad_weather_member_ages = Model_ViewAudienceDetail::get_group_age_from_comptition_ids($bad_weather_ids);
 
-		// いい天気の時の年齢分布を取得
-		$good_weather_member_ages = Model_ViewAudienceDetail::find("all", array(
-			"select" => array(
-				DB::expr("COUNT(*)"),
-				"age_group"
-				),
-			"where" => array(
-				//"age_group" => 3,
-				array("age_group", "is", DB::expr("not null")),
-				array("competition_id", "IN", $good_weather_ids),
-			),
-			"group_by" => array("age_group")
-		));
-		//var_dump($good_weather_members);
-
-		// 悪い天気の時の年齢分布を取得
-		$bad_weather_member_ages = Model_ViewAudienceDetail::find("all", array(
-			"select" => array(
-				DB::expr("COUNT(*)"),
-				"age_group"
-			),
-			"where" => array(
-				//"age_group" => 3,
-				array("age_group", "is", DB::expr("not null")),
-				array("competition_id", "IN", $bad_weather_ids),
-			),
-			"group_by" => array("age_group")
-		));
+		//var_dump($good_weather_member_ages);
 
 
 		$this->template->title = "天候結果画面";
