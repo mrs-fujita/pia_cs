@@ -69,14 +69,5 @@
 				<li><a href="form-validation.html">勝敗詳細</a></li>
 			</ul>
 		</li>
-		<li class="has-submenu">
-			<a href="#">
-				<i class="ion-compose"></i> <span class="nav-label">来場回数</span>
-			</a>
-			<ul class="list-unstyled">
-				<li><a href="form-elements.html">来場回数一覧</a></li>
-				<li><a href="form-validation.html">どうしよう・・</a></li>
-			</ul>
-		</li>
 	</ul>
 </nav>
