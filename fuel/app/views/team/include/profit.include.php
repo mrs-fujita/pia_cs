@@ -1,6 +1,42 @@
 <div class="row m-t-10">
-	<div class="col-md-12">
+	<div class="col-lg-12 col-md-12">
 		<div class="profit_graph"></div>
+	</div>
+
+
+	<div class="col-lg-12 col-md-12 m-t-40">
+		<div class="portlet"><!-- /primary heading -->
+			<div id="portlet2" class="panel-collapse collapse in">
+				<div class="portlet-body">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+							<tr>
+								<th>年代</th>
+								<th>収益</th>
+								<th>費用</th>
+								<th>損益</th>
+							</tr>
+							</thead>
+							<tbody>
+							<?php foreach($profits as $profit) : ?>
+								<tr>
+									<td><?php echo $profit["year"] ?></td>
+									<td><?php echo $profit["operating_revenue"] ?></td>
+									<td><?php echo $profit["operating_costs"] ?></td>
+									<?php if(0 <= (int) ( $profit["current_net_income"] )) : ?>
+										<td style="color: blue;"><?php echo $profit["current_net_income"] ?></td>
+									<?php else: ?>
+										<td style="color: red;"><?php echo $profit["current_net_income"] ?></td>
+									<?php endif; ?>
+								</tr>
+							<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div> <!-- /Portlet -->
 	</div>
 </div>
 

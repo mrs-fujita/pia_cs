@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-lg-12 col-md-12">
 			<div class="portlet"><!-- /primary heading -->
 				<div class="weatherType">
 					<ul class="weatherType_list">

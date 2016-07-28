@@ -28,7 +28,7 @@
 
 	<ul class="list-unstyled">
 		<li>
-			<a href="index.html">
+			<a href="<?php echo Uri::base(false) ?>analysis/index">
 				<i class="ion-home"></i> <span class="nav-label">Dashboard</span>
 			</a>
 		</li>

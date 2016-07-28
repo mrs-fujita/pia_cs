@@ -76,6 +76,7 @@ class Controller_Team extends Controller_App
 		}
 
 
+		// クラブの歴史を取得
 		$club_histories = Model_clubHistory::find("all", array(
 			"where" => array("club_id" => $select_team_id),
 			//"group_by" => array("year")
@@ -100,7 +101,8 @@ class Controller_Team extends Controller_App
 			"select" => array( "year", "operating_revenue", "operating_costs", "current_net_income" ),
 			"where"  => array(
 				"club_id" => $select_team_id,
-			)
+			),
+			'order_by' => array('year' => 'asc'),
 		));
 		// グラフ表示のために配列化
 		$profits = Format::forge($profits)->to_array();

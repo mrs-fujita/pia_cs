@@ -16,6 +16,15 @@ class Model_ViewAudienceRankCnt extends \Orm\Model
 		"year"
 	);
 
+	/**
+	 *
+	 * 指定のクラブの指定の試合のシート別の観客数を配列で返す
+	 *
+	 * @param $club_id
+	 * @param $competition_ids
+	 *
+	 * @return array
+	 */
 	public static function get_ranking_distinction_cnt($club_id, $competition_ids)
 	{
 

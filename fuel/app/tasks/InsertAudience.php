@@ -79,19 +79,6 @@ class InsertAudience
 				$index++;
 			}
 		}
-
-
-/*
-		// CSVから読み込んだ仮の状態の観戦情報を取得
-		$watch_infos = \Model_WatchingInfoProvisional::find_by(array(
-			'rewriting_flg' => 0,
-		), null, null, 10);
-
-		if(count($watch_infos) == 0)
-		{
-
-		}
-*/
 	}
 
 

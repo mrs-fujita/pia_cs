@@ -83,11 +83,9 @@ class Controller_Analysis_Weather extends Controller_App
 		// 天気が悪い時のメンバーの年齢層を取得
 		$bad_weather_member_ages = Model_ViewAudienceDetail::get_group_age_from_comptition_ids($bad_weather_ids);
 
-		//var_dump($good_weather_member_ages);
-
-
-
+		// 天気がいい時のシート別の観客数を取得
 		$good_ranking_distinction_cnts = Model_ViewAudienceRankCnt::get_ranking_distinction_cnt($select_team_id, $good_weather_ids);
+		// 天気が悪い時のシート別の観客数を取得
 		$bad_ranking_distinction_cnts = Model_ViewAudienceRankCnt::get_ranking_distinction_cnt($select_team_id, $bad_weather_ids);
 
 
