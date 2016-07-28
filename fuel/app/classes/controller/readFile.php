@@ -131,6 +131,9 @@ class Controller_ReadFile extends Controller_AppAdmin
 							// 主キーとなるidを生成 例：JU000001
 							$member_id = $team_name . sprintf('%06d', $i);
 
+							// シートのid
+							$seat_id = $grade["id"];
+
 							// 性別 男性：1、女性：0、 null：null
 							$sex_num = null;
 							if(!empty( $row[2] ))
@@ -154,7 +157,7 @@ class Controller_ReadFile extends Controller_AppAdmin
 							if($file_year == 2014)
 							{
 								// 登録するメンバーを生成
-								$member = Model_MemberProvisinal::forge()->set(array(
+								$member = Model_Member::forge()->set(array(
 									'id'                => $member_id,
 									'club_id'           => (int) $club_id,
 									'gender'            => $sex_num,
@@ -180,6 +183,7 @@ class Controller_ReadFile extends Controller_AppAdmin
 									'rank_id'   => (int) $grade["menber_rank_id"],
 									'year'      => $file_year,
 									'pia_id'    => $row[1],
+									'seat_id'   => $seat_id,
 								));
 
 								try
@@ -196,9 +200,11 @@ class Controller_ReadFile extends Controller_AppAdmin
 								}
 
 
-							}else {
+							}
+							else
+							{
 								// 登録するメンバーを生成
-								$member = Model_Member::forge()->set(array(
+								$member = Model_MemberProvisinal::forge()->set(array(
 									'id'                => $member_id,
 									'club_id'           => (int) $club_id,
 									'gender'            => $sex_num,
