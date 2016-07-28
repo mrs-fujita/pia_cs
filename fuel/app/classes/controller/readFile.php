@@ -1,11 +1,13 @@
 <?php
 
-class Controller_ReadFile extends Controller_App
+class Controller_ReadFile extends Controller_AppAdmin
 {
 
 	public function action_index()
 	{
-		return Response::forge(View::forge('readFile/index'));
+		// テンプレートを使用して管理者の一覧を表示
+		$this->template->title = "ファイル読み込み";
+		$this->template->content = View::forge('readFile/index');
 	}
 
 	/**
@@ -99,7 +101,6 @@ class Controller_ReadFile extends Controller_App
 	{
 		$data["csvFiles"] = Model_CsvTable::find_by();
 
-		$this->template = View::forge('template2');
 		$this->template->title = "CSV読み込み一覧";
 		$this->template->content = View::forge('readFile/list', $data);
 	}
