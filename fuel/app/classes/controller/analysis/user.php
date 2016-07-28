@@ -44,7 +44,6 @@ class Controller_Analysis_User extends Controller_App
 
 		//$this->template = View::forge('template_test');
 
-		//var_dump($data["members_age"]);
 		$this->template->title = "観客年齢円グラフ";
 		$this->template->content = View::forge('analysis/user/age', $data);
 	}

@@ -13,6 +13,7 @@
 
 	<?php $select_team_id = Session::get('select_team_id'); ?>
 	<?php if($select_team_id != null) : ?>
+	<a href="<?php echo Uri::base(false) ?>team/detail">
 		<div class="sideTeamInfo hidden-xs">
 			<?php echo Asset::img("club/$select_team_id/icon.png", array(
 				'id'    => 'logo',
@@ -20,6 +21,7 @@
 			)); ?>
 			<div class="sideTeamInfo_name"><?php echo Session::get('select_team_name'); ?></div>
 			<a href="<?php echo Uri::base(false) ?>team/detail" class="sideTeamInfo_link">詳しい情報</a>
+			</a>
 		</div>
 	<?php endif; ?>
 
@@ -30,16 +32,10 @@
 				<i class="ion-home"></i> <span class="nav-label">Dashboard</span>
 			</a>
 		</li>
-		<li class="has-submenu">
-			<a href="#">
+		<li>
+			<a href="<?php echo Uri::base(false) ?>analysis/event/analyzed">
 				<i class="ion-flask"></i> <span class="nav-label">イベント</span>
 			</a>
-			<ul class="list-unstyled">
-				<li><?php echo Html::anchor('event/index', 'イベント一覧'); ?></li>
-				<li><?php echo Html::anchor('event/index', 'イベント編集'); ?></li>
-				<li><?php echo Html::anchor('event/add', 'イベント追加'); ?></li>
-				<li><a href="buttons.html">イベント観客相関</a></li>
-			</ul>
 		</li>
 		<li class="has-submenu">
 			<a href="#">

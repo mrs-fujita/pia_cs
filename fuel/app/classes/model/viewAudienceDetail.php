@@ -14,4 +14,14 @@ class Model_ViewAudienceDetail extends \Orm\Model {
 
 		return $ret;
 	}
+
+	protected static $_has_many = array(
+		'member_rank_logs' => array(
+			'key_from' => 'member_id',
+			'model_to' => 'Model_MemberRankLog',
+			'key_to' => 'member_id',
+			'cascade_save' => true,
+			'cascade_delete' => false,
+		)
+	);
 }

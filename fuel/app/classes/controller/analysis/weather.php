@@ -86,6 +86,11 @@ class Controller_Analysis_Weather extends Controller_App
 		//var_dump($good_weather_member_ages);
 
 
+
+		$good_ranking_distinction_cnts = Model_ViewAudienceRankCnt::get_ranking_distinction_cnt($select_team_id, $good_weather_ids);
+		$bad_ranking_distinction_cnts = Model_ViewAudienceRankCnt::get_ranking_distinction_cnt($select_team_id, $bad_weather_ids);
+
+
 		$this->template->title = "天候結果画面";
 		$this->template->content = View::forge('analysis/weather/result');
 		// VIEW側でincludeを使っても大丈夫なように大域変数に値を設定
@@ -96,6 +101,8 @@ class Controller_Analysis_Weather extends Controller_App
 			"bad_competitons" => Format::forge($bad_competitons)->to_array(),
 			"good_weather_member_ages" => Format::forge($good_weather_member_ages)->to_array(),
 			"bad_weather_member_ages" => Format::forge($bad_weather_member_ages)->to_array(),
+			"good_ranking_distinction_cnts" => Format::forge($good_ranking_distinction_cnts)->to_array(),
+			"bad_ranking_distinction_cnts" => Format::forge($bad_ranking_distinction_cnts)->to_array(),
 		));
 	}
 
