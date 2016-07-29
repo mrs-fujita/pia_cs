@@ -10,6 +10,9 @@ teamSelect画面でチームの詳細を表示する
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.75);
+  display: none;
+
+  &.active { display: block;}
 
   .teamInfo_header {
     display: flex;

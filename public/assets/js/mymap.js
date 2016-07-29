@@ -87,7 +87,6 @@ $(function() {
  * キャンセルボタンがクリックされた時の処理
  */
 $(".js-teamInfoCancelButton").click(function(e) {
-  console.log("押された");
   e.preventDefault();
 
   // チーム情報を非表示にする
@@ -101,16 +100,17 @@ $(".js-teamInfoCancelButton").click(function(e) {
 var teamInfo = {
 
   $infoView: $(".js-teamInfo"),
+  addClassName: "active",
 
   /**
    * チーム情報を非表示にする
    */
-  hideTeamInfo: function() {this.$infoView.hide()},
+  hideTeamInfo: function() {this.$infoView.removeClass(this.addClassName)},
 
   /**
    * チーム情報を表示する
    */
-  activeTeamInfo: function() {this.$infoView.show()}
+  activeTeamInfo: function() {this.$infoView.addClass(this.addClassName)}
 }
 
 
