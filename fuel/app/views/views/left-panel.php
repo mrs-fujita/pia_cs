@@ -34,12 +34,12 @@
 		</li>
 		<li>
 			<a href="<?php echo Uri::base(false) ?>analysis/event/analyzed">
-				<i class="ion-flask"></i> <span class="nav-label">イベント</span>
+				<i class="ion-flask"></i> <span class="nav-label">イベント分析</span>
 			</a>
 		</li>
 		<li class="has-submenu">
 			<a href="#">
-				<i class="ion-settings"></i> <span class="nav-label">ユーザ</span><span class="badge bg-success">New</span>
+				<i class="ion-person"></i> <span class="nav-label">ユーザ分析</span><!--<span class="badge bg-success">New</span>-->
 			</a>
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('analysis/user/list', 'ユーザ一覧'); ?></li>
@@ -48,7 +48,7 @@
 		</li>
 		<li class="has-submenu">
 			<a href="#">
-				<i class="ion-settings"></i> <span class="nav-label">天候</span>
+				<i class="ion-ios7-cloud"></i> <span class="nav-label">天候分析</span>
 			</a>
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('analysis/weather/result', '天候別結果'); ?></li>
@@ -57,7 +57,7 @@
 		</li>
 		<li class="has-submenu">
 			<a href="#">
-				<i class="ion-compose"></i> <span class="nav-label">勝敗</span>
+				<i class="ion-compose"></i> <span class="nav-label">勝敗分析</span>
 			</a>
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('match/winPerGraph', '勝敗観客動員'); ?></li>
