@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="html html-teamSelect">
 <head>
 	<meta charset="UTF-8">
 	<title>teamSelect</title>
@@ -68,7 +68,7 @@
 	</div>
 </header>
 
-<div id="map" style="width: 100%; height: 500px"></div>
+<div id="map" style="width: 100%; height: 100%;"></div>
 
 <!-- teamInfo -->
 <?php echo View::forge('team/include/teamInfo.include') ?>
