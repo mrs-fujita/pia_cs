@@ -66,14 +66,7 @@
 				<button class="btn btn-purple w-md" type="submit">Log In</button>
 			</div>
 		</div>
-		<div class="form-group m-t-30">
-			<div class="col-sm-7">
-				<a href="recoverpw.html"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
-			</div>
-			<div class="col-sm-5 text-right">
-				<a href="register.html">Create an account</a>
-			</div>
-		</div>
+
 		<?php echo Form::close(); ?>
 
 	</div>
