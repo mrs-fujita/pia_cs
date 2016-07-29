@@ -15,6 +15,9 @@ class Controller_Analysis_Weather extends Controller_App
 
 		//$this->template = View::forge('template_test');
 
+		// 天候の一覧
+		$weathers = Model_Weather::find_all();
+
 		// 選択されているチーム
 		$select_team_id = Session::get('select_team_id');
 
@@ -93,6 +96,7 @@ class Controller_Analysis_Weather extends Controller_App
 		$this->template->content = View::forge('analysis/weather/result');
 		// VIEW側でincludeを使っても大丈夫なように大域変数に値を設定
 		$this->template->set_global(array(
+			"weathers" => $weathers,
 			"good_word" => $good_word,
 			"bad_word" => $bad_word,
 			"good_competitons" => Format::forge($good_competitons)->to_array(),

@@ -748,6 +748,17 @@ aside.left-panel.collapsed .sideTeamInfo {
   .weatherType .weatherType_item {
     color: #FFF; }
 
+/*
+# block - weatherTypeDescription
+
+天候の種類をモーダルで説明する部分のcss
+*/
+.weatherTypeDescription .weatherTypeDescription_list {
+  list-style: none;
+  padding: 0; }
+.weatherTypeDescription .weatherTypeDescription_item {
+  font-size: 12px; }
+
 /* スマホサイズの時のみ
 @media (max-width: 767px) {}
 /* スマホ・タブレット共通(基本的にスマホに適用)
