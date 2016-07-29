@@ -625,6 +625,8 @@ teamSelect画面でチームの詳細を表示する
       filter: blur(10px) brightness(0.95);
       -webkit-filter: blur(10px) brightness(0.95);
       -moz-filter: blur(10px) brightness(0.95); }
+  .fancyButton:focus, .fancyButton:active, .fancyButton:hover {
+    outline: none; }
   .fancyButton.pop-onhover:before {
     opacity: 0;
     bottom: 10px; }
