@@ -13,11 +13,17 @@ class Controller_Analysis extends Controller_App
 			$team = Model_Team::find_one_by("id", $post["team_id"]);
 			Session::set('select_team_name', $team["name"]);
 		}
-		$this->template = View::forge('template');
+		//$this->template = View::forge('template');
 
 		// 必要なデータを取得
-		$this->template->title = "分析画面";
-		$this->template->content = View::forge('analysis/index');
+		//$this->template->title = "分析画面";
+		//$this->template->content = View::forge('analysis/index');
+
+
+
+
+		// トップページが出来ていないのでリダイレクトさせる
+		Response::redirect('team/detail');
 
 		//return Response::forge(View::forge('analysis/index',$data));
 	}

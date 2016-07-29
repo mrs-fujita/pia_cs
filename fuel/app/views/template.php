@@ -121,7 +121,6 @@
 <?php else: ?>
 	<?php // echo Asset::js('lib/assets/c3-chart/userAge.js'); ?>
 <?php endif; ?>
-<?php // echo Asset::js('lib/assets/c3-chart/c3-chart.init.js'); ?>
 
 <!-- Modal-Effect -->
 <?php echo Asset::js('lib/assets/modal-effect/classie.js'); ?>

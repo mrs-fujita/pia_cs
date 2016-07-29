@@ -42,7 +42,7 @@
 				<i class="ion-person"></i> <span class="nav-label">ユーザ分析</span><!--<span class="badge bg-success">New</span>-->
 			</a>
 			<ul class="list-unstyled">
-				<li><?php echo Html::anchor('analysis/user/list', 'ユーザ一覧'); ?></li>
+				<!--<li><?php //echo Html::anchor('analysis/user/list', 'ユーザ一覧'); ?></li>-->
 				<li><?php echo Html::anchor('analysis/user/age', 'ユーザ年齢別グラフ'); ?></li>
 			</ul>
 		</li>
@@ -52,7 +52,7 @@
 			</a>
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('analysis/weather/result', '天候別結果'); ?></li>
-				<li><?php echo Html::anchor('analysis/weather/compare', '天候比較'); ?></li>
+				<!--<li><?php // echo Html::anchor('analysis/weather/compare', '天候比較'); ?></li>-->
 			</ul>
 		</li>
 		<li class="has-submenu">
@@ -62,7 +62,6 @@
 			<ul class="list-unstyled">
 				<li><?php echo Html::anchor('match/winPerGraph', '勝敗観客動員'); ?></li>
 				<li><?php echo Html::anchor('match/list', '勝敗一覧'); ?></li>
-				<li><a href="form-validation.html">勝敗詳細</a></li>
 			</ul>
 		</li>
 	</ul>

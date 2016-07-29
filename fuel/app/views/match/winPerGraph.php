@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-lg-12 col-md-12">
 			<div class="portlet"><!-- /primary heading -->
 				<div class="portlet-heading">
 					<h3 class="portlet-title text-dark">
