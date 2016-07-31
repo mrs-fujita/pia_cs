@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered">
+<table id="datatable" class="table table-striped table-bordered dataTable no-footer">
 	<thead class="thead-default">
 	<tr>
 		<th>id</th>
