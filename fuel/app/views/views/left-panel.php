@@ -78,5 +78,13 @@
 				<li><a href="form-validation.html">どうしよう・・</a></li>
 			</ul>
 		</li>
+		<li class="has-submenu">
+			<a href="#">
+				<i class="ion-compose"></i> <span class="nav-label">距離</span>
+			</a>
+			<ul class="list-unstyled">
+				<li><?php echo Html::anchor('analysis/distance/list', '距離相関'); ?></li>
+			</ul>
+		</li>
 	</ul>
 </nav>
